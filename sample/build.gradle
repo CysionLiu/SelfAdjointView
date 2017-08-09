@@ -1,0 +1,29 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion COMPILESDK_VERSION as int
+    buildToolsVersion BUILDTOOLS_VERSION
+
+    defaultConfig {
+        applicationId "com.cysion.sample"
+        minSdkVersion MINSDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode 1
+        versionName "1.0"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile "com.android.support:design:${COMPILE_TOOLS}"
+    compile "com.android.support:appcompat-v7:${COMPILE_TOOLS}"
+    compile "com.android.support:recyclerview-v7:${COMPILE_TOOLS}"
+    compile project(':AdjointLib')
+}
