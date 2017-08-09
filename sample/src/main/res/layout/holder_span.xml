@@ -2,43 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#66ff0000"
-              android:orientation="vertical">
+              android:background="#66ffffff"
+              android:padding="10dp"
+              android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="AdjointView"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16sp"/>
 
     <com.cysion.adjointlib.AdjointContainer
         android:id="@+id/container"
         android:layout_width="200dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="10dp"
         >
 
-        <com.cysion.adjointlib.view.SelfAdjustImageView
+        <com.cysion.adjointlib.view.AdjointImageView
             android:id="@+id/img_holder_img"
-            android:layout_width="200dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:padding="3dp"
+            android:background="#99ff0000"
+            android:adjustViewBounds="true"
+            android:layout_height="wrap_content"
             />
 
     </com.cysion.adjointlib.AdjointContainer>
 
     <TextView
         android:id="@+id/content"
+        android:textColor="#ff000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
         android:text="hello world"
-        android:textColor="@color/colorAccent"
         android:textSize="16sp"
-        android:visibility="gone"/>
+        />
 </LinearLayout>

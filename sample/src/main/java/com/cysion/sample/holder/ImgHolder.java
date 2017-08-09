@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.cysion.adjointlib.AdjointContainer;
+import com.cysion.adjointlib.SimpleLocator;
 import com.cysion.sample.R;
 import com.cysion.sample.model.BaseData;
 import com.cysion.sample.model.ImgData;
@@ -25,12 +26,13 @@ public class ImgHolder extends BaseViewHolder {
         mImg = (ImageView) itemView.findViewById(R.id.img_holder_img);
         mCon = (AdjointContainer) itemView.findViewById(R.id.container);
         mCon.setImageView(mImg);
+        mCon.setLocator(SimpleLocator.single());
     }
 
     @Override
     public void bindData(Activity aActivity, List<? extends BaseData> aDataList, int position) {
         ImgData baseData = (ImgData) aDataList.get(position);
         mImg.setImageResource(baseData.getImgId());
-        mCon.setParentLocation(getParentLocation());
+
     }
 }

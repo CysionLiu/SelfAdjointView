@@ -10,8 +10,6 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.cysion.adjointlib.view.SelfAdjustImageView;
-
 /**
  * Created by CysionLiu on 2017/8/9.
  */
@@ -19,26 +17,18 @@ import com.cysion.adjointlib.view.SelfAdjustImageView;
 public class AdjointContainer extends RelativeLayout implements ViewTreeObserver.OnScrollChangedListener {
     private boolean enableScrollParallax = true;
     private int[] viewLocation = new int[2];
-
     private Drawable mDrawable;
     private ImageView mImageView;
 
     private Rect parentLocation = new Rect();
+    private Locator mLocator;
 
-    public Rect getParentLocation() {
-        return parentLocation;
-    }
-
-    public void setParentLocation(Rect aParentLocation) {
-        parentLocation = aParentLocation;
+    public void setLocator(Locator aLocator) {
+        mLocator = aLocator;
     }
 
     public void setImageView(ImageView aImageView) {
         mImageView = aImageView;
-    }
-
-    public void setDrawable(Drawable aDrawable) {
-        mDrawable = aDrawable;
     }
 
     public AdjointContainer(Context context) {
@@ -74,6 +64,10 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if (mLocator != null) {
+            parentLocation = mLocator.getLocation();
+        }
+
         mDrawable = mImageView.getDrawable();
         if (!enableScrollParallax || mDrawable == null || parentLocation.bottom == 0) {
             super.onDraw(canvas);
@@ -101,7 +95,7 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
         // device's height
         int dHeight = getResources().getDisplayMetrics().heightPixels;
         dHeight = dHeight < pbottom ? dHeight : pbottom;
-        if (iWidth * vHeight < iHeight * vWidth||iHeight>vHeight) {
+        if (iWidth * vHeight < iHeight * vWidth || iHeight > vHeight) {
             // avoid over scroll
             if (y < ptop - vHeight) {
                 y = ptop - vHeight;
@@ -113,7 +107,6 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
             float max_dy = Math.abs((iHeight * imgScale - vHeight));
             y = y - ptop;
             int farY = pbottom - ptop - vHeight;
-//            float translateY = -(2 * max_dy * y + max_dy * (vHeight - dHeight)) / (vHeight + dHeight);
             float translateY = -(max_dy * y / farY);
             canvas.translate(0, translateY);
         }
@@ -131,14 +124,5 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-
-    public interface AdjointStyle {
-        void onAttachedToImageView(SelfAdjustImageView view);
-
-        void onDetachedFromImageView(SelfAdjustImageView view);
-
-        void transform(SelfAdjustImageView view, Canvas canvas, int x, int y);
     }
 }

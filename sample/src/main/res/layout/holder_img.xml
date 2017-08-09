@@ -8,7 +8,7 @@
     android:layout_height="200dp"
     android:layout_margin="2dp">
 
-    <com.cysion.adjointlib.view.SelfAdjustImageView
+    <com.cysion.adjointlib.view.AdjointImageView
         android:id="@+id/img_holder_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
