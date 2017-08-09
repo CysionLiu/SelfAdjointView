@@ -5,8 +5,8 @@
     android:id="@+id/container"
     android:background="@color/colorAccent"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
-    android:layout_margin="10dp">
+    android:layout_height="200dp"
+    android:layout_margin="2dp">
 
     <com.cysion.adjointlib.view.SelfAdjustImageView
         android:id="@+id/img_holder_img"

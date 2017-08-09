@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -102,7 +101,7 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
         // device's height
         int dHeight = getResources().getDisplayMetrics().heightPixels;
         dHeight = dHeight < pbottom ? dHeight : pbottom;
-        if (iWidth * vHeight < iHeight * vWidth) {
+        if (iWidth * vHeight < iHeight * vWidth||iHeight>vHeight) {
             // avoid over scroll
             if (y < ptop - vHeight) {
                 y = ptop - vHeight;
@@ -113,7 +112,7 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
             float imgScale = (float) vWidth / (float) iWidth;
             float max_dy = Math.abs((iHeight * imgScale - vHeight));
             y = y - ptop;
-            int farY = pbottom - ptop-vHeight;
+            int farY = pbottom - ptop - vHeight;
 //            float translateY = -(2 * max_dy * y + max_dy * (vHeight - dHeight)) / (vHeight + dHeight);
             float translateY = -(max_dy * y / farY);
             canvas.translate(0, translateY);

@@ -8,6 +8,15 @@ public class SpanData extends BaseData {
     private String imgUrl;
     private String title;
     private String content;
+    private int resId;
+
+    public int getResId() {
+        return resId;
+    }
+
+    public void setResId(int aResId) {
+        resId = aResId;
+    }
 
     public String getImgUrl() {
         return imgUrl;
