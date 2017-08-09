@@ -31,7 +31,6 @@ public class ImgHolder extends BaseViewHolder {
     public void bindData(Activity aActivity, List<? extends BaseData> aDataList, int position) {
         ImgData baseData = (ImgData) aDataList.get(position);
         mImg.setImageResource(baseData.getImgId());
-
+        mCon.setParentLocation(getParentLocation());
     }
-
 }

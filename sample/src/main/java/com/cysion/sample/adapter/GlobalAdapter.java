@@ -2,6 +2,7 @@ package com.cysion.sample.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,12 @@ public class GlobalAdapter extends RecyclerView.Adapter {
     private LayoutInflater mLayoutInflater;
     private Context mContext;
     private Activity mActivity;
+
+    private Rect parentLocation = new Rect();
+
+    public void setParentLocation(Rect aParentLocation) {
+        parentLocation = aParentLocation;
+    }
 
     public GlobalAdapter(Context aContext, List<? extends BaseData> aDataList) {
         if (aContext instanceof Activity) {
@@ -57,13 +64,13 @@ public class GlobalAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ((BaseViewHolder) holder).setParentLocation(parentLocation);
         ((BaseViewHolder) holder).bindData(mActivity, mDataList, holder.getLayoutPosition());
 
     }
 
     @Override
     public int getItemCount() {
-        Log.e("flag--", "getItemCount(GlobalAdapter.java:65)-->>" + mDataList.size());
         return mDataList.size();
 
     }

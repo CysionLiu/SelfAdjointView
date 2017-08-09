@@ -1,6 +1,7 @@
 package com.cysion.sample.holder;
 
 import android.app.Activity;
+import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -11,6 +12,15 @@ import java.util.List;
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
     private String mPageType;
     protected Activity mActivity;
+    private Rect parentLocation = new Rect();
+
+    public Rect getParentLocation() {
+        return parentLocation;
+    }
+
+    public void setParentLocation(Rect aParentLocation) {
+        parentLocation = aParentLocation;
+    }
 
     public String getPageType() {
         return mPageType;

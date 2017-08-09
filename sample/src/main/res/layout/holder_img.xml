@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_marginBottom="5dp"
-              android:orientation="vertical">
 
-    <com.cysion.adjointlib.AdjointContainer
-        android:id="@+id/container"
-        android:gravity="bottom"
+<com.cysion.adjointlib.AdjointContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:background="@color/colorAccent"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:layout_margin="10dp">
+
+    <com.cysion.adjointlib.view.SelfAdjustImageView
+        android:id="@+id/img_holder_img"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"/>
 
-        <com.cysion.adjointlib.view.SelfAdjustImageView
-            android:id="@+id/img_holder_img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"/>
-    </com.cysion.adjointlib.AdjointContainer>
-</LinearLayout>
+</com.cysion.adjointlib.AdjointContainer>
+
