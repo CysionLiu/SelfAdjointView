@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.cysion.sample.model.BaseData;
+
+import java.util.List;
+
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
     private String mPageType;
     protected Activity mActivity;
@@ -20,5 +24,5 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public abstract void bindData(Activity aActivity, Object obj, int position);
+    public abstract void bindData(Activity aActivity, List<? extends BaseData> aDataList, int position);
 }

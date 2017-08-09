@@ -22,12 +22,12 @@ public class GlobalAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public static final int SPAN = 0XC02;
     public static final int HORI_LIST = 0XC03;
     //--
-    private List<BaseData> mDataList;
+    private List<? extends BaseData> mDataList;
     private LayoutInflater mLayoutInflater;
     private Context mContext;
     private Activity mActivity;
 
-    public GlobalAdapter(Context aContext, List<BaseData> aDataList) {
+    public GlobalAdapter(Context aContext, List<? extends BaseData> aDataList) {
         if (aContext instanceof Activity) {
             mActivity = (Activity) aContext;
         }
