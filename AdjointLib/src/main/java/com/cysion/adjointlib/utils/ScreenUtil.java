@@ -12,13 +12,6 @@ import java.lang.reflect.Field;
 
 /**
  * Created by cysion.liu on 2016/6/20.
- * 屏幕工具类：
- * 1--获得屏幕密度
- * 2--获得屏幕宽度，考虑了虚拟键
- * 3--获得屏幕高度，考虑了虚拟键
- * 4--获得状态栏高度
- * 5--隐藏键盘
- * 6--dp，px,sp的互转
  */
 public class ScreenUtil {
 

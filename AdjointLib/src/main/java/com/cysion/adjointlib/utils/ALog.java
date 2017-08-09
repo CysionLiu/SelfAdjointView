@@ -6,11 +6,6 @@ import android.widget.Toast;
 
 /**
  * Created by cysion.liu on 2016/6/20.
- * 调试工具类
- * 1--纯吐司测试
- * 2--纯log测试
- * 3--自定义位置的普通吐司
- * 4--自定义视图吐司
  */
 public class ALog {
 

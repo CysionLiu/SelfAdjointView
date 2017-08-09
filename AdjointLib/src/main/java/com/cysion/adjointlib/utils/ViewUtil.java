@@ -8,10 +8,6 @@ import java.util.List;
 
 /**
  * Created by cysion.liu on 2016/6/21.
- * view工具类，目前功能包括：
- * 1--获得view的高度、宽度;
- * 2--设置view的高度、宽度;
- * 3--遍历获得view中所有的子view
  */
 public class ViewUtil {
 
