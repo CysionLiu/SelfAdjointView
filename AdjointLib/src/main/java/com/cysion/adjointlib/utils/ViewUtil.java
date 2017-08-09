@@ -13,7 +13,7 @@ import java.util.List;
  * 2--设置view的高度、宽度;
  * 3--遍历获得view中所有的子view
  */
-public class TdViewUtils {
+public class ViewUtil {
 
 
     /**

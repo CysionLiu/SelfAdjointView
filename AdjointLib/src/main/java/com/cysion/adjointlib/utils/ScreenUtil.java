@@ -20,7 +20,7 @@ import java.lang.reflect.Field;
  * 5--隐藏键盘
  * 6--dp，px,sp的互转
  */
-public class TdScreenUtils {
+public class ScreenUtil {
 
     /**
      * 获得屏幕密度
