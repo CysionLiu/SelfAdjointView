@@ -29,14 +29,17 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
 
     public AdjointContainer(Context context) {
         super(context);
+        setBackgroundColor(0x0000);
     }
 
     public AdjointContainer(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        setBackgroundColor(0x0000);
     }
 
     public AdjointContainer(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setBackgroundColor(0x0000);
     }
 
 
@@ -104,7 +107,5 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int childCount = getChildCount();
-        ImageView img = (ImageView) getChildAt(0);
     }
 }

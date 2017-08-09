@@ -3,6 +3,7 @@ package com.cysion.sample.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,7 +16,7 @@ import com.cysion.sample.model.BaseData;
 
 import java.util.List;
 
-public class GlobalAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class GlobalAdapter extends RecyclerView.Adapter {
 
     //layout type
     public static final int IMAGE = 0XC01;
@@ -38,7 +39,8 @@ public class GlobalAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     //根据type分发显示各个holder对应的UI
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.e("flag--", "onCreateViewHolder(GlobalAdapter.java:43)-->>" + viewType);
         switch (viewType) {
             case IMAGE:
                 return new ImgHolder(mLayoutInflater.inflate(R.layout
@@ -54,13 +56,16 @@ public class GlobalAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
-        holder.bindData(mActivity, mDataList, holder.getLayoutPosition());
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ((BaseViewHolder) holder).bindData(mActivity, mDataList, holder.getLayoutPosition());
+
     }
 
     @Override
     public int getItemCount() {
+        Log.e("flag--", "getItemCount(GlobalAdapter.java:65)-->>" + mDataList.size());
         return mDataList.size();
+
     }
 
     @Override
