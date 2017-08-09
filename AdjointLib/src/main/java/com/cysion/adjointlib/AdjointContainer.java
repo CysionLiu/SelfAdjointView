@@ -68,6 +68,9 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
             parentLocation = mLocator.getLocation();
         }
 
+        if (mImageView==null) {
+            mImageView = (ImageView) getChildAt(0);
+        }
         mDrawable = mImageView.getDrawable();
         if (!enableScrollParallax || mDrawable == null || parentLocation.bottom == 0) {
             super.onDraw(canvas);

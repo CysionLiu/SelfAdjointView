@@ -1,4 +1,4 @@
-package com.cysion.adjointlib;
+package com.cysion.adjointlib.style;
 
 import android.graphics.Canvas;
 

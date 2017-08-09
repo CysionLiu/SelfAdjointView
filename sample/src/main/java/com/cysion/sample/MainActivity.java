@@ -1,11 +1,13 @@
 package com.cysion.sample;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.cysion.adjointlib.SimpleLocator;
 import com.cysion.adjointlib.utils.ALog;
@@ -42,5 +44,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public void next(View view) {
+        Intent myIntent = new Intent(MainActivity.this, SecondActivity.class);
+        startActivity(myIntent);
     }
 }
