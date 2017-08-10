@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ScrollView;
 
-import com.cysion.adjointlib.AdjointContainer;
+import com.cysion.adjointlib.view.AdjointContainer;
 import com.cysion.adjointlib.Locator;
 import com.cysion.adjointlib.style.VerticalAlphaStyle;
 import com.cysion.adjointlib.style.VerticalMoveStyle;
+import com.cysion.adjointlib.style.VerticalScaleStyle;
 
 public class SecondActivity extends AppCompatActivity implements Locator {
 
@@ -44,6 +45,12 @@ public class SecondActivity extends AppCompatActivity implements Locator {
         mContainer4.addStyle(new VerticalAlphaStyle());
         mContainer5.addStyle(new VerticalAlphaStyle());
         mContainer6.addStyle(new VerticalAlphaStyle());
+        mContainer1.addStyle(new VerticalScaleStyle());
+        mContainer2.addStyle(new VerticalScaleStyle());
+        mContainer3.addStyle(new VerticalScaleStyle());
+        mContainer4.addStyle(new VerticalScaleStyle());
+        mContainer5.addStyle(new VerticalScaleStyle());
+        mContainer6.addStyle(new VerticalScaleStyle());
         mR = new Rect();
         mScrollView.post(new Runnable() {
             @Override

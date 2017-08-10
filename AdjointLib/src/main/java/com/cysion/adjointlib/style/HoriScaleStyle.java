@@ -12,15 +12,23 @@ import com.cysion.adjointlib.utils.ScreenUtil;
  * Created by Cysion Liu on 2017/8/10.
  */
 
-public class HoriAlphaStyle implements AdjointStyle {
-    private float minAlpha = 0.5f;
+public class HoriScaleStyle implements AdjointStyle {
 
+    private float minScale = 0.7f;
+    private float multi = 1f;
 
-    public void setMinAlpha(float aMinAlpha) {
-        if (aMinAlpha < 0) {
-            aMinAlpha = 0;
+    public void setMinScale(float aMinScale) {
+        if (aMinScale < 0.7f || aMinScale >= 1.0f) {
+            aMinScale = 0.7f;
         }
-        minAlpha = aMinAlpha;
+        minScale = aMinScale;
+    }
+
+    public void setMulti(float aMulti) {
+        if (aMulti < 1.0f) {
+            aMulti = 1.0f;
+        }
+        multi = aMulti;
     }
 
     @Override
@@ -42,7 +50,7 @@ public class HoriAlphaStyle implements AdjointStyle {
 
         // view's width and height
         int vWidth = aContainer.getWidth() - aContainer.getPaddingLeft() - aContainer.getPaddingRight();
-
+        int vHeight = aContainer.getHeight() - aContainer.getPaddingTop() - aContainer.getPaddingBottom();
         // device's height
         int dWidth = ScreenUtil.getScreenWidth(aContainer.getContext());
         dWidth = dWidth < pRight ? dWidth : pRight;
@@ -64,6 +72,10 @@ public class HoriAlphaStyle implements AdjointStyle {
         }
         ALog.single().ld("target x:" + x);
         float al = -4.0f * index * index / (itemMaxMoveScope * itemMaxMoveScope) + 4.0f * index / itemMaxMoveScope;
-        aContainer.setAlpha(al + minAlpha);
+        al = al * multi;
+        if (al < minScale) {
+            al = minScale;
+        }
+        canvas.scale(al, al, vWidth / 2, vHeight / 2);
     }
 }

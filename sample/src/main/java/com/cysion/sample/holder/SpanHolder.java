@@ -5,8 +5,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cysion.adjointlib.AdjointContainer;
+import com.cysion.adjointlib.view.AdjointContainer;
 import com.cysion.adjointlib.SimpleLocator;
+import com.cysion.adjointlib.style.VerticalAlphaStyle;
 import com.cysion.adjointlib.style.VerticalMoveStyle;
 import com.cysion.sample.R;
 import com.cysion.sample.model.BaseData;
@@ -31,6 +32,7 @@ public class SpanHolder extends BaseViewHolder {
         mContent = (TextView) itemView.findViewById(R.id.content);
         mCon.setLocator(SimpleLocator.single());
         mCon.addStyle(new VerticalMoveStyle());
+        mCon.addStyle(new VerticalAlphaStyle());
     }
 
     @Override

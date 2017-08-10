@@ -3,6 +3,8 @@ package com.cysion.adjointlib;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import com.cysion.adjointlib.view.AdjointContainer;
+
 /**
  * Created by Administrator on 2017/8/9.
  */

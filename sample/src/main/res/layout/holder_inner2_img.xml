@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.cysion.adjointlib.AdjointContainer
+<com.cysion.adjointlib.view.AdjointContainer
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:my="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
-    android:layout_width="120dp"
+    android:layout_width="150dp"
     android:layout_height="match_parent"
     android:layout_marginRight="20dp"
     >
@@ -16,5 +16,5 @@
         android:adjustViewBounds="true"
         my:isVertical="false"/>
 
-</com.cysion.adjointlib.AdjointContainer>
+</com.cysion.adjointlib.view.AdjointContainer>
 

@@ -19,7 +19,7 @@
             android:layout_margin="10dp"
             android:orientation="vertical">
 
-            <com.cysion.adjointlib.AdjointContainer
+            <com.cysion.adjointlib.view.AdjointContainer
                 android:id="@+id/adcontainer1"
                 android:layout_width="match_parent"
 
@@ -31,9 +31,9 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:src="@mipmap/p1c"/>
-            </com.cysion.adjointlib.AdjointContainer>
+            </com.cysion.adjointlib.view.AdjointContainer>
 
-            <com.cysion.adjointlib.AdjointContainer
+            <com.cysion.adjointlib.view.AdjointContainer
                 android:id="@+id/adcontainer2"
                 android:layout_width="match_parent"
 
@@ -45,9 +45,9 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:src="@mipmap/p2c"/>
-            </com.cysion.adjointlib.AdjointContainer>
+            </com.cysion.adjointlib.view.AdjointContainer>
 
-            <com.cysion.adjointlib.AdjointContainer
+            <com.cysion.adjointlib.view.AdjointContainer
                 android:id="@+id/adcontainer3"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -58,9 +58,9 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:src="@mipmap/p3c"/>
-            </com.cysion.adjointlib.AdjointContainer>
+            </com.cysion.adjointlib.view.AdjointContainer>
 
-            <com.cysion.adjointlib.AdjointContainer
+            <com.cysion.adjointlib.view.AdjointContainer
                 android:id="@+id/adcontainer4"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -71,9 +71,9 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:src="@mipmap/p4c"/>
-            </com.cysion.adjointlib.AdjointContainer>
+            </com.cysion.adjointlib.view.AdjointContainer>
 
-            <com.cysion.adjointlib.AdjointContainer
+            <com.cysion.adjointlib.view.AdjointContainer
                 android:id="@+id/adcontainer5"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -84,9 +84,9 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:src="@mipmap/p5c"/>
-            </com.cysion.adjointlib.AdjointContainer>
+            </com.cysion.adjointlib.view.AdjointContainer>
 
-            <com.cysion.adjointlib.AdjointContainer
+            <com.cysion.adjointlib.view.AdjointContainer
                 android:id="@+id/adcontainer6"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:src="@mipmap/p6c"/>
-            </com.cysion.adjointlib.AdjointContainer>
+            </com.cysion.adjointlib.view.AdjointContainer>
 
         </LinearLayout>
 

@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
-import com.cysion.adjointlib.AdjointContainer;
+import com.cysion.adjointlib.view.AdjointContainer;
 import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.utils.ALog;
 import com.cysion.adjointlib.utils.ScreenUtil;

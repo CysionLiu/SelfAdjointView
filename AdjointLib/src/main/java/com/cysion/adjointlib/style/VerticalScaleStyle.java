@@ -12,14 +12,22 @@ import com.cysion.adjointlib.utils.ScreenUtil;
  * Created by Cysion Liu on 2017/8/10.
  */
 
-public class VerticalAlphaStyle implements AdjointStyle {
-    private float minAlpha = 0.5f;
+public class VerticalScaleStyle implements AdjointStyle {
+    private float minScale = 0.7f;
+    private float multi = 1f;
 
-    public void setMinAlpha(float aMinAlpha) {
-        if (aMinAlpha < 0) {
-            aMinAlpha = 0;
+    public void setMinScale(float aMinScale) {
+        if (aMinScale < 0.7f || aMinScale >= 1.0f) {
+            aMinScale = 0.7f;
         }
-        minAlpha = aMinAlpha;
+        minScale = aMinScale;
+    }
+
+    public void setMulti(float aMulti) {
+        if (aMulti < 1.0f) {
+            aMulti = 1.0f;
+        }
+        multi = aMulti;
     }
 
     @Override
@@ -34,7 +42,6 @@ public class VerticalAlphaStyle implements AdjointStyle {
 
     @Override
     public void transform(AdjointContainer aContainer, Canvas canvas, int[] viewLocation, Rect parentLocation) {
-
         ALog.single().ld("alpha-begin");
         int y = viewLocation[1];
         int ptop = parentLocation.top;
@@ -64,7 +71,12 @@ public class VerticalAlphaStyle implements AdjointStyle {
         if (index >= itemMaxMoveScope) {
             index = itemMaxMoveScope;
         }
+        ALog.single().ld("target y:" + y);
         float al = -4.0f * index * index / (itemMaxMoveScope * itemMaxMoveScope) + 4.0f * index / itemMaxMoveScope;
-        aContainer.setAlpha(al + minAlpha);
+        al = al * multi;
+        if (al < minScale) {
+            al = minScale;
+        }
+        canvas.scale(al, al, vWidth / 2, vHeight / 2);
     }
 }

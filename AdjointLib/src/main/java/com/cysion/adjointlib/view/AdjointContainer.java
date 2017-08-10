@@ -1,4 +1,4 @@
-package com.cysion.adjointlib;
+package com.cysion.adjointlib.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
+
+import com.cysion.adjointlib.AdjointStyle;
+import com.cysion.adjointlib.Locator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +22,6 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
     private boolean enableScrollParallax = true;
     private int[] viewLocation = new int[2];
     private List<AdjointStyle> mAdjointStyles = new ArrayList<>();
-
     private Rect parentLocation = new Rect();//parent list rect
     private Locator mLocator;
 
@@ -94,4 +96,6 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
             requestLayout();
         }
     }
+
+
 }
