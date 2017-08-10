@@ -23,6 +23,7 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
     private ImageView mImageView;
     private AdjointStyle mAdjointStyle = new VerticalMoveStyle();
 
+
     public void setAdjointStyle(AdjointStyle aAdjointStyle) {
         mAdjointStyle = aAdjointStyle;
     }

@@ -21,7 +21,8 @@ public class GlobalAdapter extends RecyclerView.Adapter {
     public static final int IMAGE = 0XC01;
     public static final int SPAN = 0XC02;
     public static final int HORI_LIST = 0XC03;
-    public static final int HORI_IMG = 0XC04;
+    public static final int HORI_IMG1 = 0XC04;
+    public static final int HORI_IMG2 = 0XC05;
     //--
     private List<? extends BaseData> mDataList;
     private LayoutInflater mLayoutInflater;
@@ -44,9 +45,12 @@ public class GlobalAdapter extends RecyclerView.Adapter {
             case IMAGE:
                 return new ImgHolder(mLayoutInflater.inflate(R.layout
                         .holder_img, parent, false));
-            case HORI_IMG:
+            case HORI_IMG1:
                 return new ImgHolder(mLayoutInflater.inflate(R.layout
                         .holder_inner_img, parent, false));
+            case HORI_IMG2:
+                return new ImgHolder(mLayoutInflater.inflate(R.layout
+                        .holder_inner2_img, parent, false));
             case SPAN:
                 return new SpanHolder(mLayoutInflater.inflate(R.layout
                         .holder_span, parent, false));

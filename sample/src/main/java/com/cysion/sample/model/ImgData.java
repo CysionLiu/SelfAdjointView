@@ -7,6 +7,15 @@ package com.cysion.sample.model;
 public class ImgData extends BaseData {
     private String imgUrl;
     private int imgId;
+    private int oriType = 0;
+
+    public int getOriType() {
+        return oriType;
+    }
+
+    public void setOriType(int aOriType) {
+        oriType = aOriType;
+    }
 
     public int getImgId() {
         return imgId;

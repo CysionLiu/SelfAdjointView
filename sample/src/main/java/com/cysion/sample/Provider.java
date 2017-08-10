@@ -56,13 +56,28 @@ public class Provider {
         return list;
     }
 
-    public BaseData getHori() {
+    public BaseData getHori1() {
         HoriData horiData = new HoriData();
         horiData.setItemType(GlobalAdapter.HORI_LIST);
         List<BaseData> temp = new ArrayList<>();
         for (int i = 0; i < imgIds.length; i++) {
             ImgData data = new ImgData();
-            data.setItemType(GlobalAdapter.HORI_IMG);
+            data.setItemType(GlobalAdapter.HORI_IMG1);
+            data.setOriType(1);
+            data.setImgId(imgIds[i]);
+            temp.add(data);
+        }
+        horiData.setDataList(temp);
+        return horiData;
+    }
+    public BaseData getHori2() {
+        HoriData horiData = new HoriData();
+        horiData.setItemType(GlobalAdapter.HORI_LIST);
+        List<BaseData> temp = new ArrayList<>();
+        for (int i = 0; i < imgIds.length; i++) {
+            ImgData data = new ImgData();
+            data.setItemType(GlobalAdapter.HORI_IMG2);
+            data.setOriType(2);
             data.setImgId(imgIds[i]);
             temp.add(data);
         }

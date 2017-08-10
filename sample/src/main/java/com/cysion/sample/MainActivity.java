@@ -31,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false));
         List<BaseData> imgList = Provider.single().getImgs();
         List<BaseData> spanlist = Provider.single().getSpans();
-        BaseData hori = Provider.single().getHori();
+        BaseData hori = Provider.single().getHori1();
+        BaseData hori2 = Provider.single().getHori2();
         imgList.add(hori);
         imgList.addAll(spanlist);
-
+        imgList.add(hori2);
         mAdapter = new GlobalAdapter(this, imgList);
         mR = new Rect();
         mRecyclerView.post(new Runnable() {
