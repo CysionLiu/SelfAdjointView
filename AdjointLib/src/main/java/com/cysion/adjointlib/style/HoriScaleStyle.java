@@ -3,6 +3,7 @@ package com.cysion.adjointlib.style;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import com.cysion.adjointlib.AdjConfig;
 import com.cysion.adjointlib.view.AdjointContainer;
 import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.utils.ALog;
@@ -14,8 +15,33 @@ import com.cysion.adjointlib.utils.ScreenUtil;
 
 public class HoriScaleStyle implements AdjointStyle {
 
-    private float minScale = 0.7f;
+    private float minScale = 0.85f;
     private float multi = 1f;
+
+    private float linearPos = 0.1f;
+    private boolean linearable = false;
+
+    public HoriScaleStyle setAdjConfig(AdjConfig aAdjConfig) {
+        if (aAdjConfig == null) {
+            return this;
+        }
+        setLinearable(aAdjConfig.isLinearable());
+        setLinearPos(aAdjConfig.getLinearPos());
+        setMinScale(aAdjConfig.getMin());
+        setMulti(aAdjConfig.getMulti());
+        return this;
+    }
+
+    public void setLinearPos(float aLinearPos) {
+        if (aLinearPos > 0.3f || aLinearPos < 0.0f) {
+            aLinearPos = 0.3f;
+        }
+        linearPos = aLinearPos;
+    }
+
+    public void setLinearable(boolean aLinearable) {
+        linearable = aLinearable;
+    }
 
     public void setMinScale(float aMinScale) {
         if (aMinScale < 0.7f || aMinScale >= 1.0f) {
@@ -70,12 +96,21 @@ public class HoriScaleStyle implements AdjointStyle {
         if (index >= itemMaxMoveScope) {
             index = itemMaxMoveScope;
         }
+        float al = 1.0f;
         ALog.single().ld("target x:" + x);
-        float al = -4.0f * index * index / (itemMaxMoveScope * itemMaxMoveScope) + 4.0f * index / itemMaxMoveScope;
-        al = al * multi;
+        if (linearable) {
+            if (index < linearPos * itemMaxMoveScope) {
+                index = 0;
+            }
+            al = (1 - minScale)*(itemMaxMoveScope-index) / itemMaxMoveScope + minScale;
+        } else {
+            al = (4 * minScale - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
+                    + (4.0f - 4 * minScale) * index / itemMaxMoveScope + minScale;
+        }
         if (al < minScale) {
             al = minScale;
         }
+        al = al * multi;
         canvas.scale(al, al, vWidth / 2, vHeight / 2);
     }
 }

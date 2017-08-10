@@ -3,10 +3,11 @@ package com.cysion.adjointlib.style;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.cysion.adjointlib.view.AdjointContainer;
+import com.cysion.adjointlib.AdjConfig;
 import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.utils.ALog;
 import com.cysion.adjointlib.utils.ScreenUtil;
+import com.cysion.adjointlib.view.AdjointContainer;
 
 /**
  * Created by Cysion Liu on 2017/8/10.
@@ -14,7 +15,30 @@ import com.cysion.adjointlib.utils.ScreenUtil;
 
 public class HoriAlphaStyle implements AdjointStyle {
     private float minAlpha = 0.5f;
+    private float linearPos = 0.05f;
+    private boolean linearable = false;
+    private AdjConfig mAdjConfig;
 
+    public HoriAlphaStyle setAdjConfig(AdjConfig aAdjConfig) {
+        if (aAdjConfig == null) {
+            return this;
+        }
+        setLinearable(aAdjConfig.isLinearable());
+        setLinearPos(aAdjConfig.getLinearPos());
+        setMinAlpha(aAdjConfig.getMin());
+        return this;
+    }
+
+    public void setLinearPos(float aLinearPos) {
+        if (aLinearPos > 0.2f || aLinearPos < 0.0f) {
+            aLinearPos = 0.2f;
+        }
+        linearPos = aLinearPos;
+    }
+
+    public void setLinearable(boolean aLinearable) {
+        linearable = aLinearable;
+    }
 
     public void setMinAlpha(float aMinAlpha) {
         if (aMinAlpha < 0) {
@@ -62,8 +86,18 @@ public class HoriAlphaStyle implements AdjointStyle {
         if (index >= itemMaxMoveScope) {
             index = itemMaxMoveScope;
         }
+        float al = 1.0f;
         ALog.single().ld("target x:" + x);
-        float al = -4.0f * index * index / (itemMaxMoveScope * itemMaxMoveScope) + 4.0f * index / itemMaxMoveScope;
+        if (linearable) {
+            if (index < linearPos * itemMaxMoveScope) {
+                index = 0;
+            }
+            al = (1 - minAlpha)*(itemMaxMoveScope-index) / itemMaxMoveScope + minAlpha;
+        } else {
+            al = (4 * minAlpha - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
+                    + (4.0f - 4 * minAlpha) * index / itemMaxMoveScope + minAlpha;
+        }
+        ALog.single().ld("target x:" + x);
         aContainer.setAlpha(al + minAlpha);
     }
 }

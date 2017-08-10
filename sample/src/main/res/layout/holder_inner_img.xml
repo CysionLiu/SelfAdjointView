@@ -5,15 +5,16 @@
     xmlns:my="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="200dp"
-    android:layout_height="120dp"
-    android:layout_marginRight="20dp"
+    android:layout_height="match_parent"
+    android:layout_marginRight="10dp"
 
     >
 
     <com.cysion.adjointlib.view.AdjointImageView
         android:id="@+id/img_holder_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        my:isVertical = "false"
+        android:layout_height="match_parent"
         android:adjustViewBounds="true"/>
 
 </com.cysion.adjointlib.view.AdjointContainer>

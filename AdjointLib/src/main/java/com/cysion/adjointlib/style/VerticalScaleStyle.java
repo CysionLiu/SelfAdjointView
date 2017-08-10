@@ -3,6 +3,7 @@ package com.cysion.adjointlib.style;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import com.cysion.adjointlib.AdjConfig;
 import com.cysion.adjointlib.view.AdjointContainer;
 import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.utils.ALog;
@@ -13,19 +14,43 @@ import com.cysion.adjointlib.utils.ScreenUtil;
  */
 
 public class VerticalScaleStyle implements AdjointStyle {
-    private float minScale = 0.7f;
+    private float minScale = 0.85f;
     private float multi = 1f;
+    private float linearPos = 0.3f;
+    private boolean linearable = true;
+
+    public VerticalScaleStyle setAdjConfig(AdjConfig aAdjConfig) {
+        if (aAdjConfig == null) {
+            return this;
+        }
+        setLinearable(aAdjConfig.isLinearable());
+        setLinearPos(aAdjConfig.getLinearPos());
+        setMinScale(aAdjConfig.getMin());
+        setMulti(aAdjConfig.getMulti());
+        return this;
+    }
+
+    public void setLinearPos(float aLinearPos) {
+        if (aLinearPos > 0.2f || aLinearPos < 0.0f) {
+            aLinearPos = linearPos;
+        }
+        linearPos = aLinearPos;
+    }
+
+    public void setLinearable(boolean aLinearable) {
+        linearable = aLinearable;
+    }
 
     public void setMinScale(float aMinScale) {
         if (aMinScale < 0.7f || aMinScale >= 1.0f) {
-            aMinScale = 0.7f;
+            aMinScale = minScale;
         }
         minScale = aMinScale;
     }
 
     public void setMulti(float aMulti) {
         if (aMulti < 1.0f) {
-            aMulti = 1.0f;
+            aMulti = multi;
         }
         multi = aMulti;
     }
@@ -63,7 +88,7 @@ public class VerticalScaleStyle implements AdjointStyle {
             y = dHeight;
         }
         y = y - ptop;
-        int itemMaxMoveScope = pbottom - ptop - vHeight / 2;
+        int itemMaxMoveScope = pbottom - ptop - vHeight;
         float index = y;
         if (index <= 0) {
             index = 1.0f;
@@ -72,11 +97,20 @@ public class VerticalScaleStyle implements AdjointStyle {
             index = itemMaxMoveScope;
         }
         ALog.single().ld("target y:" + y);
-        float al = -4.0f * index * index / (itemMaxMoveScope * itemMaxMoveScope) + 4.0f * index / itemMaxMoveScope;
-        al = al * multi;
+        float al = 1.0f;
+        if (linearable) {
+            if (index < linearPos * itemMaxMoveScope) {
+                index = 0;
+            }
+            al = (1 - minScale) * (itemMaxMoveScope - index) / itemMaxMoveScope + minScale;
+        } else {
+            al = (4 * minScale - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
+                    + (4.0f - 4 * minScale) * index / itemMaxMoveScope + minScale;
+        }
         if (al < minScale) {
             al = minScale;
         }
+        al = al * multi;
         canvas.scale(al, al, vWidth / 2, vHeight / 2);
     }
 }

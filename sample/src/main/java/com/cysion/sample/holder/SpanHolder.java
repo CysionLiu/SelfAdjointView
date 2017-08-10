@@ -32,7 +32,9 @@ public class SpanHolder extends BaseViewHolder {
         mContent = (TextView) itemView.findViewById(R.id.content);
         mCon.setLocator(SimpleLocator.single());
         mCon.addStyle(new VerticalMoveStyle());
-        mCon.addStyle(new VerticalAlphaStyle());
+        VerticalAlphaStyle style = new VerticalAlphaStyle();
+        style.setLinearable(false);
+        mCon.addStyle(style);
     }
 
     @Override
