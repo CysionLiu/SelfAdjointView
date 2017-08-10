@@ -3,14 +3,13 @@ package com.cysion.adjointlib;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.cysion.adjointlib.style.VerticalMoveStyle;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by CysionLiu on 2017/8/9.
@@ -19,25 +18,11 @@ import com.cysion.adjointlib.style.VerticalMoveStyle;
 public class AdjointContainer extends RelativeLayout implements ViewTreeObserver.OnScrollChangedListener {
     private boolean enableScrollParallax = true;
     private int[] viewLocation = new int[2];
-    private Drawable mDrawable;
-    private ImageView mImageView;
-    private AdjointStyle mAdjointStyle = new VerticalMoveStyle();
+    private List<AdjointStyle> mAdjointStyles = new ArrayList<>();
 
-
-    public void setAdjointStyle(AdjointStyle aAdjointStyle) {
-        mAdjointStyle = aAdjointStyle;
-    }
-
-    private Rect parentLocation = new Rect();
+    private Rect parentLocation = new Rect();//parent list rect
     private Locator mLocator;
 
-    public void setLocator(Locator aLocator) {
-        mLocator = aLocator;
-    }
-
-    public void setImageView(ImageView aImageView) {
-        mImageView = aImageView;
-    }
 
     public AdjointContainer(Context context) {
         super(context);
@@ -70,53 +55,36 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
         super.onDetachedFromWindow();
     }
 
+    public void addStyle(AdjointStyle aAdjointStyle) {
+        mAdjointStyles.add(aAdjointStyle);
+    }
+
+    public void removeStyle(AdjointStyle aAdjointStyle) {
+        mAdjointStyles.remove(aAdjointStyle);
+    }
+
+    public void clearStyles(){
+        mAdjointStyles.clear();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         if (mLocator != null) {
             parentLocation = mLocator.getLocation();
         }
-//        mDrawable = mImageView.getDrawable();
         if (!enableScrollParallax || parentLocation.bottom == 0) {
             super.onDraw(canvas);
             return;
         }
         getLocationInWindow(viewLocation);
-        if (mAdjointStyle != null) {
-            mAdjointStyle.transform(this, canvas, viewLocation, parentLocation);
+        for (int i = 0; i < mAdjointStyles.size(); i++) {
+            mAdjointStyles.get(i).transform(this, canvas, viewLocation, parentLocation);
         }
-
-//        int y = viewLocation[1];
-//        int ptop = parentLocation.top;
-//        int pbottom = parentLocation.bottom;
-//        // image's width and height
-//        int iWidth = mDrawable.getIntrinsicWidth();
-//        int iHeight = mDrawable.getIntrinsicHeight();
-//        if (iWidth <= 0 || iHeight <= 0) {
-//            return;
-//        }
-//        // view's width and height
-//        int vWidth = getWidth() - getPaddingLeft() - getPaddingRight();
-//        int vHeight = getHeight() - getPaddingTop() - getPaddingBottom();
-//
-//        // device's height
-//        int dHeight = getResources().getDisplayMetrics().heightPixels;
-//        dHeight = dHeight < pbottom ? dHeight : pbottom;
-//        if (iWidth * vHeight < iHeight * vWidth || iHeight > vHeight) {
-//            // avoid over scroll
-//            if (y < ptop - vHeight) {
-//                y = ptop - vHeight;
-//            } else if (y > dHeight) {
-//                y = dHeight;
-//            }
-//
-//            float imgScale = (float) vWidth / (float) iWidth;
-//            float max_dy = Math.abs((iHeight * imgScale - vHeight));
-//            y = y - ptop;
-//            int farY = pbottom - ptop - vHeight;
-//            float translateY = -(max_dy * y / farY);
-//            canvas.translate(0, translateY);
-//        }
         super.onDraw(canvas);
+    }
+
+    public void setLocator(Locator aLocator) {
+        mLocator = aLocator;
     }
 
     @Override
@@ -125,10 +93,5 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
             invalidate();
             requestLayout();
         }
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }

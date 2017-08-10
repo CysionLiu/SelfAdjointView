@@ -6,8 +6,12 @@ import android.widget.ImageView;
 
 import com.cysion.adjointlib.AdjointContainer;
 import com.cysion.adjointlib.SimpleLocator;
+import com.cysion.adjointlib.style.HoriAlphaStyle;
 import com.cysion.adjointlib.style.HoriMoveStyle;
+import com.cysion.adjointlib.style.VerticalAlphaStyle;
+import com.cysion.adjointlib.style.VerticalMoveStyle;
 import com.cysion.sample.R;
+import com.cysion.sample.helper.HoriLocator;
 import com.cysion.sample.model.BaseData;
 import com.cysion.sample.model.ImgData;
 
@@ -26,14 +30,24 @@ public class ImgHolder extends BaseViewHolder {
         super(itemView);
         mImg = (ImageView) itemView.findViewById(R.id.img_holder_img);
         mCon = (AdjointContainer) itemView.findViewById(R.id.container);
-        mCon.setLocator(SimpleLocator.single());
+
     }
 
     @Override
     public void bindData(Activity aActivity, List<? extends BaseData> aDataList, int position) {
         ImgData baseData = (ImgData) aDataList.get(position);
+        mCon.clearStyles();
         if (baseData.getOriType() > 1) {
-            mCon.setAdjointStyle(new HoriMoveStyle());
+            mCon.setLocator(HoriLocator.single());
+            mCon.addStyle(new HoriMoveStyle());
+            mCon.addStyle(new HoriAlphaStyle());
+        } else if (baseData.getOriType() == 1) {
+            mCon.setLocator(SimpleLocator.single());
+            mCon.addStyle(new VerticalMoveStyle());
+        }else{
+            mCon.setLocator(SimpleLocator.single());
+            mCon.addStyle(new VerticalMoveStyle());
+            mCon.addStyle(new VerticalAlphaStyle());
         }
         mImg.setImageResource(baseData.getImgId());
 
