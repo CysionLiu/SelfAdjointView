@@ -9,7 +9,7 @@
 
     <com.cysion.adjointlib.AdjointContainer
         android:id="@+id/container"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
@@ -33,6 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="hello world"
-        android:textSize="16sp"
+        android:textSize="30sp"
         />
 </LinearLayout>

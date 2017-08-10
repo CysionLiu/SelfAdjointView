@@ -2,6 +2,7 @@ package com.cysion.sample;
 
 import com.cysion.sample.adapter.GlobalAdapter;
 import com.cysion.sample.model.BaseData;
+import com.cysion.sample.model.HoriData;
 import com.cysion.sample.model.ImgData;
 import com.cysion.sample.model.SpanData;
 
@@ -33,8 +34,8 @@ public class Provider {
             data.setItemType(GlobalAdapter.IMAGE);
             int temp = 0;
             temp = i;
-            if (i>=imgIds.length) {
-                temp = i%imgIds.length;
+            if (i >= imgIds.length) {
+                temp = i % imgIds.length;
             }
             data.setImgId(imgIds[temp]);
             list.add(data);
@@ -53,6 +54,20 @@ public class Provider {
             list.add(data);
         }
         return list;
+    }
+
+    public BaseData getHori() {
+        HoriData horiData = new HoriData();
+        horiData.setItemType(GlobalAdapter.HORI_LIST);
+        List<BaseData> temp = new ArrayList<>();
+        for (int i = 0; i < imgIds.length; i++) {
+            ImgData data = new ImgData();
+            data.setItemType(GlobalAdapter.HORI_IMG);
+            data.setImgId(imgIds[i]);
+            temp.add(data);
+        }
+        horiData.setDataList(temp);
+        return horiData;
     }
 
 }

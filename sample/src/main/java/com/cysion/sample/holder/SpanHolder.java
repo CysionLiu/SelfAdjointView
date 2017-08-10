@@ -28,7 +28,6 @@ public class SpanHolder extends BaseViewHolder {
         mImg = (ImageView) itemView.findViewById(R.id.img_holder_img);
         mCon = (AdjointContainer) itemView.findViewById(R.id.container);
         mContent = (TextView) itemView.findViewById(R.id.content);
-        mCon.setImageView(mImg);
         mCon.setLocator(SimpleLocator.single());
     }
 

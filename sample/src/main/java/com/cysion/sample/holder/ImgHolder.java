@@ -25,7 +25,6 @@ public class ImgHolder extends BaseViewHolder {
         super(itemView);
         mImg = (ImageView) itemView.findViewById(R.id.img_holder_img);
         mCon = (AdjointContainer) itemView.findViewById(R.id.container);
-        mCon.setImageView(mImg);
         mCon.setLocator(SimpleLocator.single());
     }
 

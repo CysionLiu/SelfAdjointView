@@ -10,6 +10,8 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.cysion.adjointlib.style.VerticalMoveStyle;
+
 /**
  * Created by CysionLiu on 2017/8/9.
  */
@@ -19,6 +21,11 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
     private int[] viewLocation = new int[2];
     private Drawable mDrawable;
     private ImageView mImageView;
+    private AdjointStyle mAdjointStyle = new VerticalMoveStyle();
+
+    public void setAdjointStyle(AdjointStyle aAdjointStyle) {
+        mAdjointStyle = aAdjointStyle;
+    }
 
     private Rect parentLocation = new Rect();
     private Locator mLocator;
@@ -67,52 +74,47 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
         if (mLocator != null) {
             parentLocation = mLocator.getLocation();
         }
-
-        if (mImageView==null) {
-            mImageView = (ImageView) getChildAt(0);
-        }
-        mDrawable = mImageView.getDrawable();
-        if (!enableScrollParallax || mDrawable == null || parentLocation.bottom == 0) {
+//        mDrawable = mImageView.getDrawable();
+        if (!enableScrollParallax || parentLocation.bottom == 0) {
             super.onDraw(canvas);
             return;
         }
-
-//        if (parallaxStyles != null){
-//            parallaxStyles.transform(this, canvas, viewLocation[0], viewLocation[1]);
-//        }
-
         getLocationInWindow(viewLocation);
-        int y = viewLocation[1];
-        int ptop = parentLocation.top;
-        int pbottom = parentLocation.bottom;
-        // image's width and height
-        int iWidth = mDrawable.getIntrinsicWidth();
-        int iHeight = mDrawable.getIntrinsicHeight();
-        if (iWidth <= 0 || iHeight <= 0) {
-            return;
+        if (mAdjointStyle != null) {
+            mAdjointStyle.transform(this, canvas, viewLocation, parentLocation);
         }
-        // view's width and height
-        int vWidth = getWidth() - getPaddingLeft() - getPaddingRight();
-        int vHeight = getHeight() - getPaddingTop() - getPaddingBottom();
 
-        // device's height
-        int dHeight = getResources().getDisplayMetrics().heightPixels;
-        dHeight = dHeight < pbottom ? dHeight : pbottom;
-        if (iWidth * vHeight < iHeight * vWidth || iHeight > vHeight) {
-            // avoid over scroll
-            if (y < ptop - vHeight) {
-                y = ptop - vHeight;
-            } else if (y > dHeight) {
-                y = dHeight;
-            }
-
-            float imgScale = (float) vWidth / (float) iWidth;
-            float max_dy = Math.abs((iHeight * imgScale - vHeight));
-            y = y - ptop;
-            int farY = pbottom - ptop - vHeight;
-            float translateY = -(max_dy * y / farY);
-            canvas.translate(0, translateY);
-        }
+//        int y = viewLocation[1];
+//        int ptop = parentLocation.top;
+//        int pbottom = parentLocation.bottom;
+//        // image's width and height
+//        int iWidth = mDrawable.getIntrinsicWidth();
+//        int iHeight = mDrawable.getIntrinsicHeight();
+//        if (iWidth <= 0 || iHeight <= 0) {
+//            return;
+//        }
+//        // view's width and height
+//        int vWidth = getWidth() - getPaddingLeft() - getPaddingRight();
+//        int vHeight = getHeight() - getPaddingTop() - getPaddingBottom();
+//
+//        // device's height
+//        int dHeight = getResources().getDisplayMetrics().heightPixels;
+//        dHeight = dHeight < pbottom ? dHeight : pbottom;
+//        if (iWidth * vHeight < iHeight * vWidth || iHeight > vHeight) {
+//            // avoid over scroll
+//            if (y < ptop - vHeight) {
+//                y = ptop - vHeight;
+//            } else if (y > dHeight) {
+//                y = dHeight;
+//            }
+//
+//            float imgScale = (float) vWidth / (float) iWidth;
+//            float max_dy = Math.abs((iHeight * imgScale - vHeight));
+//            y = y - ptop;
+//            int farY = pbottom - ptop - vHeight;
+//            float translateY = -(max_dy * y / farY);
+//            canvas.translate(0, translateY);
+//        }
         super.onDraw(canvas);
     }
 

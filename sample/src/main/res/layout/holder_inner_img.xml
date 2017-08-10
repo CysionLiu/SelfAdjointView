@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.cysion.adjointlib.AdjointContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="200dp"
+    android:layout_height="match_parent"
+    android:layout_margin="2dp"
+    >
+
+    <com.cysion.adjointlib.view.AdjointImageView
+        android:id="@+id/img_holder_img"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"/>
+
+</com.cysion.adjointlib.AdjointContainer>
+

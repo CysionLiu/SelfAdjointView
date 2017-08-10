@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false));
         List<BaseData> imgList = Provider.single().getImgs();
         List<BaseData> spanlist = Provider.single().getSpans();
+        BaseData hori = Provider.single().getHori();
+        imgList.add(hori);
         imgList.addAll(spanlist);
 
         mAdapter = new GlobalAdapter(this, imgList);

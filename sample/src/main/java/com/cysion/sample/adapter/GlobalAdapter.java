@@ -15,12 +15,13 @@ import com.cysion.sample.model.BaseData;
 
 import java.util.List;
 
-public class GlobalAdapter extends RecyclerView.Adapter{
+public class GlobalAdapter extends RecyclerView.Adapter {
 
     //layout type
     public static final int IMAGE = 0XC01;
     public static final int SPAN = 0XC02;
     public static final int HORI_LIST = 0XC03;
+    public static final int HORI_IMG = 0XC04;
     //--
     private List<? extends BaseData> mDataList;
     private LayoutInflater mLayoutInflater;
@@ -43,6 +44,9 @@ public class GlobalAdapter extends RecyclerView.Adapter{
             case IMAGE:
                 return new ImgHolder(mLayoutInflater.inflate(R.layout
                         .holder_img, parent, false));
+            case HORI_IMG:
+                return new ImgHolder(mLayoutInflater.inflate(R.layout
+                        .holder_inner_img, parent, false));
             case SPAN:
                 return new SpanHolder(mLayoutInflater.inflate(R.layout
                         .holder_span, parent, false));
