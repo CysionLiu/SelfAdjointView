@@ -3,7 +3,6 @@ package com.cysion.adjointlib.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
@@ -31,12 +30,12 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
         init();
     }
 
-    public AdjointContainer(Context context, @Nullable AttributeSet attrs) {
+    public AdjointContainer(Context context,  AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public AdjointContainer(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public AdjointContainer(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
