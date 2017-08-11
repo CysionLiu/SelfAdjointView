@@ -13,8 +13,7 @@ import com.cysion.adjointlib.utils.ScreenUtil;
  * Created by Cysion Liu on 2017/8/10.
  */
 
-public class HoriScaleSimpleStyle extends SimpleStyle implements AdjointStyle {
-
+public class VerticalAlphaStyle extends SimpleStyle implements AdjointStyle {
 
     @Override
     public void onAttachedToImageView(AdjointContainer view) {
@@ -28,27 +27,30 @@ public class HoriScaleSimpleStyle extends SimpleStyle implements AdjointStyle {
 
     @Override
     public void transform(AdjointContainer aContainer, Canvas canvas, int[] viewLocation, Rect parentLocation) {
+
         ALog.single().ld("alpha-begin");
-        int x = viewLocation[0];
-        int pLeft = parentLocation.left;
-        int pRight = parentLocation.right;
+        int y = viewLocation[1];
+        int ptop = parentLocation.top;
+        int pbottom = parentLocation.bottom;
+        ALog.single().ld("parentLocation.bottom--" + parentLocation.bottom);
 
         // view's width and height
         int vWidth = aContainer.getWidth() - aContainer.getPaddingLeft() - aContainer.getPaddingRight();
         int vHeight = aContainer.getHeight() - aContainer.getPaddingTop() - aContainer.getPaddingBottom();
+
         // device's height
-        int dWidth = ScreenUtil.getScreenWidth(aContainer.getContext());
-        dWidth = dWidth < pRight ? dWidth : pRight;
+        int dHeight = ScreenUtil.getScreenHeight(aContainer.getContext());
+        dHeight = dHeight < pbottom ? dHeight : pbottom;
 
         // avoid over scroll
-        if (x < pLeft - vWidth) {
-            x = pLeft - vWidth;
-        } else if (x > dWidth) {
-            x = dWidth;
+        if (y < ptop - vHeight) {
+            y = ptop - vHeight;
+        } else if (y > dHeight) {
+            y = dHeight;
         }
-        x = x - pLeft;
-        int itemMaxMoveScope = pRight - pLeft - vWidth;
-        float index = x;
+        y = y - ptop;
+        int itemMaxMoveScope = pbottom - ptop - vHeight;
+        float index = y;
         if (index <= 0) {
             index = 1.0f;
         }
@@ -56,20 +58,15 @@ public class HoriScaleSimpleStyle extends SimpleStyle implements AdjointStyle {
             index = itemMaxMoveScope;
         }
         float al = 1.0f;
-        ALog.single().ld("target x:" + x);
         if (isLinearable()) {
-            if (index < getLinearPos() * itemMaxMoveScope) {
+            if (index < (getLinearPos() * itemMaxMoveScope)) {
                 index = 0;
             }
-            al = (1 - getMinScale()) * (itemMaxMoveScope - index) / itemMaxMoveScope + getMinScale();
+            al = (1 - getMinAlpha())*(itemMaxMoveScope-index) / itemMaxMoveScope + getMinAlpha();
         } else {
-            al = (4 * getMinScale() - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
-                    + (4.0f - 4 * getMinScale()) * index / itemMaxMoveScope + getMinScale();
+            al = (4 * getMinAlpha() - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
+                    + (4.0f - 4 * getMinAlpha()) * index / itemMaxMoveScope + getMinAlpha();
         }
-        if (al < getMinScale()) {
-            al = getMinScale();
-        }
-        al = al * getFactor();
-        canvas.scale(al, al, vWidth*getPrivotX() / 2, vHeight / 2);
+        aContainer.setAlpha(al);
     }
 }

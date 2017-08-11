@@ -13,7 +13,7 @@ import com.cysion.adjointlib.view.AdjointContainer;
  * Created by Cysion Liu on 2017/8/10.
  */
 
-public class HoriAlphaSimpleStyle extends SimpleStyle implements AdjointStyle {
+public class HoriAlphaStyle extends SimpleStyle implements AdjointStyle {
 
     @Override
     public void onAttachedToImageView(AdjointContainer view) {

@@ -7,8 +7,8 @@ import android.widget.ScrollView;
 
 import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.Locator;
-import com.cysion.adjointlib.style.VerticalAlphaSimpleStyle;
-import com.cysion.adjointlib.style.VerticalScaleSimpleStyle;
+import com.cysion.adjointlib.style.VerticalAlphaStyle;
+import com.cysion.adjointlib.style.VerticalScaleStyle;
 import com.cysion.adjointlib.view.AdjointContainer;
 
 public class SecondActivity extends AppCompatActivity implements Locator {
@@ -33,20 +33,20 @@ public class SecondActivity extends AppCompatActivity implements Locator {
         mContainer4 = (AdjointContainer) findViewById(R.id.adcontainer4);
         mContainer5 = (AdjointContainer) findViewById(R.id.adcontainer5);
         mContainer6 = (AdjointContainer) findViewById(R.id.adcontainer6);
-        AdjointStyle style = new VerticalAlphaSimpleStyle();
+        AdjointStyle style = new VerticalAlphaStyle();
         mContainer1.addStyle(style);
         mContainer2.addStyle(style);
         mContainer3.addStyle(style);
         mContainer4.addStyle(style);
         mContainer5.addStyle(style);
-//        mContainer6.addStyle(new VerticalAlphaSimpleStyle().linearable(true));
-        AdjointStyle ver  = new VerticalScaleSimpleStyle().minScale(0.9f);
+//        mContainer6.addStyle(new VerticalAlphaStyle().linearable(true));
+        AdjointStyle ver  = new VerticalScaleStyle().minScale(0.9f);
         mContainer1.addStyle(ver);
         mContainer2.addStyle(ver);
         mContainer3.addStyle(ver);
         mContainer4.addStyle(ver);
         mContainer5.addStyle(ver);
-//        mContainer6.addStyle(new VerticalScaleSimpleStyle().linearable(true));
+//        mContainer6.addStyle(new VerticalScaleStyle().linearable(true));
         mR = new Rect();
         mScrollView.post(new Runnable() {
             @Override

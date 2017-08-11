@@ -13,7 +13,7 @@ import com.cysion.adjointlib.utils.ScreenUtil;
  * Created by Cysion Liu on 2017/8/10.
  */
 
-public class VerticalScaleSimpleStyle extends SimpleStyle implements AdjointStyle {
+public class VerticalScaleStyle extends SimpleStyle implements AdjointStyle {
 
     @Override
     public void onAttachedToImageView(AdjointContainer view) {

@@ -13,7 +13,8 @@ import com.cysion.adjointlib.utils.ScreenUtil;
  * Created by Cysion Liu on 2017/8/10.
  */
 
-public class VerticalAlphaSimpleStyle extends SimpleStyle implements AdjointStyle {
+public class HoriScaleStyle extends SimpleStyle implements AdjointStyle {
+
 
     @Override
     public void onAttachedToImageView(AdjointContainer view) {
@@ -27,30 +28,27 @@ public class VerticalAlphaSimpleStyle extends SimpleStyle implements AdjointStyl
 
     @Override
     public void transform(AdjointContainer aContainer, Canvas canvas, int[] viewLocation, Rect parentLocation) {
-
         ALog.single().ld("alpha-begin");
-        int y = viewLocation[1];
-        int ptop = parentLocation.top;
-        int pbottom = parentLocation.bottom;
-        ALog.single().ld("parentLocation.bottom--" + parentLocation.bottom);
+        int x = viewLocation[0];
+        int pLeft = parentLocation.left;
+        int pRight = parentLocation.right;
 
         // view's width and height
         int vWidth = aContainer.getWidth() - aContainer.getPaddingLeft() - aContainer.getPaddingRight();
         int vHeight = aContainer.getHeight() - aContainer.getPaddingTop() - aContainer.getPaddingBottom();
-
         // device's height
-        int dHeight = ScreenUtil.getScreenHeight(aContainer.getContext());
-        dHeight = dHeight < pbottom ? dHeight : pbottom;
+        int dWidth = ScreenUtil.getScreenWidth(aContainer.getContext());
+        dWidth = dWidth < pRight ? dWidth : pRight;
 
         // avoid over scroll
-        if (y < ptop - vHeight) {
-            y = ptop - vHeight;
-        } else if (y > dHeight) {
-            y = dHeight;
+        if (x < pLeft - vWidth) {
+            x = pLeft - vWidth;
+        } else if (x > dWidth) {
+            x = dWidth;
         }
-        y = y - ptop;
-        int itemMaxMoveScope = pbottom - ptop - vHeight;
-        float index = y;
+        x = x - pLeft;
+        int itemMaxMoveScope = pRight - pLeft - vWidth;
+        float index = x;
         if (index <= 0) {
             index = 1.0f;
         }
@@ -58,15 +56,20 @@ public class VerticalAlphaSimpleStyle extends SimpleStyle implements AdjointStyl
             index = itemMaxMoveScope;
         }
         float al = 1.0f;
+        ALog.single().ld("target x:" + x);
         if (isLinearable()) {
-            if (index < (getLinearPos() * itemMaxMoveScope)) {
+            if (index < getLinearPos() * itemMaxMoveScope) {
                 index = 0;
             }
-            al = (1 - getMinAlpha())*(itemMaxMoveScope-index) / itemMaxMoveScope + getMinAlpha();
+            al = (1 - getMinScale()) * (itemMaxMoveScope - index) / itemMaxMoveScope + getMinScale();
         } else {
-            al = (4 * getMinAlpha() - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
-                    + (4.0f - 4 * getMinAlpha()) * index / itemMaxMoveScope + getMinAlpha();
+            al = (4 * getMinScale() - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
+                    + (4.0f - 4 * getMinScale()) * index / itemMaxMoveScope + getMinScale();
         }
-        aContainer.setAlpha(al);
+        if (al < getMinScale()) {
+            al = getMinScale();
+        }
+        al = al * getFactor();
+        canvas.scale(al, al, vWidth*getPrivotX() / 2, vHeight / 2);
     }
 }
