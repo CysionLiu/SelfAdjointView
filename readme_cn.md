@@ -1,5 +1,5 @@
 # SelfAdjointView
-SelfAdjointView 是一个方便开发者实现滑动内联动效的安卓库，这些效果包括平行滑动、缩放和透明度变化，支持同时作用于一个布局，也支持用户自定义某些滑动内联动效。具体见下面动效图。
+SelfAdjointView 是一个方便开发者实现滑动内联动效的安卓库，这些效果包括平行滑动、缩放和透明度变化，支持同时作用于一个布局，也支持用户自定义某些滑动内联动效。具体见下面动效图。欢迎**star 或者 pull request**
 
 ## 适用范围
 - ScrollView/HorizontalScrollView
