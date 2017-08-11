@@ -1,29 +1,26 @@
 # SelfAdjointView
-[中文参见这里](/readme-cn.md)
+SelfAdjointView 是一个方便开发者实现滑动内联动效的安卓库，这些效果包括平行滑动、缩放和透明度变化，支持同时作用于一个布局，也支持用户自定义某些滑动内联动效。具体见下面动效图。
 
-SelfAdjointView is an Android library that allows developers to easily let view change with the parent 
-which can scroll. The animation contains one or more of parallax,alpha,scale.
-
-## Apply to
+## 适用范围
 - ScrollView/HorizontalScrollView
 - ListView/GridView
 - RecyclerView
 - ViewPager
-- sth else that can scroll
+- 能滑动的其它ViewGroup
 
-## EFFECT
+## 动效
 ---
 <img src="gif/g1.gif" width="30%" > .............<img src="gif/g2.gif" width="30%"> 
 
 ---
 <img src="gif/g3.gif" width="30%">..............<img src="gif/g4.gif" width="30%"> 
 
-## Samples
-[click me](./apk/sample-debug.apk)
+## 例子
+[点我见安装包](./apk/sample-debug.apk)
 
-## How do I use it?
+## 如何使用?
 
-### Setup
+### 配置
 ```
 dependencies {
   // jCenter
@@ -31,13 +28,13 @@ dependencies {
 }
 ```
 
-### Parallax
-Now the effect can only use for image while the image can be places in any viewgroup provided it is AdjointImageView and it is wrapped by AdjointContainer. Note that in this condition, AdjointContainer should only have one child, and height/width of image should be larger than that of container(vertical move).
+### 平行滑动效果
+目前这个效果仅支持作用于图片，可以与其它动效同时作用于图片。该图片应该是AdjointImageView或者其子类，同时该view应该被AdjointContainer包裹，此时，该container应该只有这一个子view.注意，若要有效果，还需图片本身的高/宽比大于container的。
 
 
 #### Step 1
 
-Code in layout
+布局代码
 
 ```
 ...<sth like scrollview>...
@@ -70,7 +67,7 @@ Code in layout
 
 #### Step 2
 
-Set scroll View's location in Rect and provide a locator for AdjointContainer.
+获得滑动容器的位置信息，以Rect标示，并提供一个Locator来传递给AdjointContainer.
 
 ```java
 public class SecondActivity extends AppCompatActivity implements Locator...
@@ -93,22 +90,22 @@ mContainer1 = (AdjointContainer) findViewById(R.id.adcontainer1);
 
 #### Step 3
 
-create an obj of AdjointStyle and add it to the container.
+创建AdjointStyle对象，并设置给容器。
 
 ```java
  AdjointStyle style= new VerticalMoveStyle().minScale(0.9f);
  mContainer1.addStyle(style);
 ```
- and now when parent scrolls, the image scrolls too.
+此时，滑动容器滑动时，图片也会滑动，产生逆差效果。
 
 
 ### Alpha/Scale
 
-View(s) to show these effect should be wrapped in AdjointContainer.
+若想具有此类效果，View(s)应该置于AdjointContainer中.
 
 #### Step 1
 
-Code in layout
+布局代码
 
 ```
 <ScrollView
@@ -157,13 +154,11 @@ Code in layout
 ```
 
 #### Step 2
-Just like step2 in Parallex-step2.
-
-
+见之前的step-2
 
 #### Step 3
 
-create one or more obj of AdjointStyle and add it to the container.
+创建一个或多个AdjointStyle对象，并设置给容器。
 
 ```java
 AdjointStyle style= new VerticalMoveStyle().minScale(0.9f);
@@ -173,9 +168,9 @@ AdjointStyle style2= new VerticalAlphaStyle();
  mContainer1.addStyle(style2);
 ..
 ```
- and now when parent scrolls, the image will change its alpha or scale.
+此时，滑动容器滑动时，目标View就会产生透明度变化/缩放/平行逆差等效果
 
-##### Refer to sample app for more detail. 
+##### 参见例子工程以查看更多细节. 
 
 License
 -------
