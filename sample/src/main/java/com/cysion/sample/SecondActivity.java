@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ScrollView;
 
+import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.Locator;
-import com.cysion.adjointlib.style.VerticalAlphaStyle;
-import com.cysion.adjointlib.style.VerticalScaleStyle;
+import com.cysion.adjointlib.style.VerticalAlphaSimpleStyle;
+import com.cysion.adjointlib.style.VerticalScaleSimpleStyle;
 import com.cysion.adjointlib.view.AdjointContainer;
 
 public class SecondActivity extends AppCompatActivity implements Locator {
@@ -32,18 +33,20 @@ public class SecondActivity extends AppCompatActivity implements Locator {
         mContainer4 = (AdjointContainer) findViewById(R.id.adcontainer4);
         mContainer5 = (AdjointContainer) findViewById(R.id.adcontainer5);
         mContainer6 = (AdjointContainer) findViewById(R.id.adcontainer6);
-        mContainer1.addStyle(new VerticalAlphaStyle());
-        mContainer2.addStyle(new VerticalAlphaStyle());
-        mContainer3.addStyle(new VerticalAlphaStyle());
-        mContainer4.addStyle(new VerticalAlphaStyle());
-        mContainer5.addStyle(new VerticalAlphaStyle());
-        mContainer6.addStyle(new VerticalAlphaStyle());
-        mContainer1.addStyle(new VerticalScaleStyle());
-        mContainer2.addStyle(new VerticalScaleStyle());
-        mContainer3.addStyle(new VerticalScaleStyle());
-        mContainer4.addStyle(new VerticalScaleStyle());
-        mContainer5.addStyle(new VerticalScaleStyle());
-        mContainer6.addStyle(new VerticalScaleStyle());
+        AdjointStyle style = new VerticalAlphaSimpleStyle();
+        mContainer1.addStyle(style);
+        mContainer2.addStyle(style);
+        mContainer3.addStyle(style);
+        mContainer4.addStyle(style);
+        mContainer5.addStyle(style);
+//        mContainer6.addStyle(new VerticalAlphaSimpleStyle().linearable(true));
+        AdjointStyle ver  = new VerticalScaleSimpleStyle().minScale(0.9f);
+        mContainer1.addStyle(ver);
+        mContainer2.addStyle(ver);
+        mContainer3.addStyle(ver);
+        mContainer4.addStyle(ver);
+        mContainer5.addStyle(ver);
+//        mContainer6.addStyle(new VerticalScaleSimpleStyle().linearable(true));
         mR = new Rect();
         mScrollView.post(new Runnable() {
             @Override

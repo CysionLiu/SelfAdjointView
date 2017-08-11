@@ -3,7 +3,7 @@ package com.cysion.adjointlib.style;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.cysion.adjointlib.AdjConfig;
+import com.cysion.adjointlib.SimpleStyle;
 import com.cysion.adjointlib.view.AdjointContainer;
 import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.utils.ALog;
@@ -13,49 +13,8 @@ import com.cysion.adjointlib.utils.ScreenUtil;
  * Created by Cysion Liu on 2017/8/10.
  */
 
-public class HoriScaleStyle implements AdjointStyle {
+public class HoriScaleSimpleStyle extends SimpleStyle implements AdjointStyle {
 
-    private float minScale = 0.85f;
-    private float multi = 1f;
-
-    private float linearPos = 0.1f;
-    private boolean linearable = false;
-
-    public HoriScaleStyle setAdjConfig(AdjConfig aAdjConfig) {
-        if (aAdjConfig == null) {
-            return this;
-        }
-        setLinearable(aAdjConfig.isLinearable());
-        setLinearPos(aAdjConfig.getLinearPos());
-        setMinScale(aAdjConfig.getMin());
-        setMulti(aAdjConfig.getMulti());
-        return this;
-    }
-
-    public void setLinearPos(float aLinearPos) {
-        if (aLinearPos > 0.3f || aLinearPos < 0.0f) {
-            aLinearPos = 0.3f;
-        }
-        linearPos = aLinearPos;
-    }
-
-    public void setLinearable(boolean aLinearable) {
-        linearable = aLinearable;
-    }
-
-    public void setMinScale(float aMinScale) {
-        if (aMinScale < 0.7f || aMinScale >= 1.0f) {
-            aMinScale = 0.7f;
-        }
-        minScale = aMinScale;
-    }
-
-    public void setMulti(float aMulti) {
-        if (aMulti < 1.0f) {
-            aMulti = 1.0f;
-        }
-        multi = aMulti;
-    }
 
     @Override
     public void onAttachedToImageView(AdjointContainer view) {
@@ -98,19 +57,19 @@ public class HoriScaleStyle implements AdjointStyle {
         }
         float al = 1.0f;
         ALog.single().ld("target x:" + x);
-        if (linearable) {
-            if (index < linearPos * itemMaxMoveScope) {
+        if (isLinearable()) {
+            if (index < getLinearPos() * itemMaxMoveScope) {
                 index = 0;
             }
-            al = (1 - minScale)*(itemMaxMoveScope-index) / itemMaxMoveScope + minScale;
+            al = (1 - getMinScale()) * (itemMaxMoveScope - index) / itemMaxMoveScope + getMinScale();
         } else {
-            al = (4 * minScale - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
-                    + (4.0f - 4 * minScale) * index / itemMaxMoveScope + minScale;
+            al = (4 * getMinScale() - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
+                    + (4.0f - 4 * getMinScale()) * index / itemMaxMoveScope + getMinScale();
         }
-        if (al < minScale) {
-            al = minScale;
+        if (al < getMinScale()) {
+            al = getMinScale();
         }
-        al = al * multi;
-        canvas.scale(al, al, vWidth / 2, vHeight / 2);
+        al = al * getFactor();
+        canvas.scale(al, al, vWidth*getPrivotX() / 2, vHeight / 2);
     }
 }

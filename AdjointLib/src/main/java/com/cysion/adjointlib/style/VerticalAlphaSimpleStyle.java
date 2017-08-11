@@ -3,7 +3,7 @@ package com.cysion.adjointlib.style;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.cysion.adjointlib.AdjConfig;
+import com.cysion.adjointlib.SimpleStyle;
 import com.cysion.adjointlib.view.AdjointContainer;
 import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.utils.ALog;
@@ -13,47 +13,7 @@ import com.cysion.adjointlib.utils.ScreenUtil;
  * Created by Cysion Liu on 2017/8/10.
  */
 
-public class VerticalScaleStyle implements AdjointStyle {
-    private float minScale = 0.85f;
-    private float multi = 1f;
-    private float linearPos = 0.3f;
-    private boolean linearable = true;
-
-    public VerticalScaleStyle setAdjConfig(AdjConfig aAdjConfig) {
-        if (aAdjConfig == null) {
-            return this;
-        }
-        setLinearable(aAdjConfig.isLinearable());
-        setLinearPos(aAdjConfig.getLinearPos());
-        setMinScale(aAdjConfig.getMin());
-        setMulti(aAdjConfig.getMulti());
-        return this;
-    }
-
-    public void setLinearPos(float aLinearPos) {
-        if (aLinearPos > 0.2f || aLinearPos < 0.0f) {
-            aLinearPos = linearPos;
-        }
-        linearPos = aLinearPos;
-    }
-
-    public void setLinearable(boolean aLinearable) {
-        linearable = aLinearable;
-    }
-
-    public void setMinScale(float aMinScale) {
-        if (aMinScale < 0.7f || aMinScale >= 1.0f) {
-            aMinScale = minScale;
-        }
-        minScale = aMinScale;
-    }
-
-    public void setMulti(float aMulti) {
-        if (aMulti < 1.0f) {
-            aMulti = multi;
-        }
-        multi = aMulti;
-    }
+public class VerticalAlphaSimpleStyle extends SimpleStyle implements AdjointStyle {
 
     @Override
     public void onAttachedToImageView(AdjointContainer view) {
@@ -67,6 +27,7 @@ public class VerticalScaleStyle implements AdjointStyle {
 
     @Override
     public void transform(AdjointContainer aContainer, Canvas canvas, int[] viewLocation, Rect parentLocation) {
+
         ALog.single().ld("alpha-begin");
         int y = viewLocation[1];
         int ptop = parentLocation.top;
@@ -96,21 +57,16 @@ public class VerticalScaleStyle implements AdjointStyle {
         if (index >= itemMaxMoveScope) {
             index = itemMaxMoveScope;
         }
-        ALog.single().ld("target y:" + y);
         float al = 1.0f;
-        if (linearable) {
-            if (index < linearPos * itemMaxMoveScope) {
+        if (isLinearable()) {
+            if (index < (getLinearPos() * itemMaxMoveScope)) {
                 index = 0;
             }
-            al = (1 - minScale) * (itemMaxMoveScope - index) / itemMaxMoveScope + minScale;
+            al = (1 - getMinAlpha())*(itemMaxMoveScope-index) / itemMaxMoveScope + getMinAlpha();
         } else {
-            al = (4 * minScale - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
-                    + (4.0f - 4 * minScale) * index / itemMaxMoveScope + minScale;
+            al = (4 * getMinAlpha() - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
+                    + (4.0f - 4 * getMinAlpha()) * index / itemMaxMoveScope + getMinAlpha();
         }
-        if (al < minScale) {
-            al = minScale;
-        }
-        al = al * multi;
-        canvas.scale(al, al, vWidth / 2, vHeight / 2);
+        aContainer.setAlpha(al);
     }
 }

@@ -3,7 +3,7 @@ package com.cysion.adjointlib.style;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.cysion.adjointlib.AdjConfig;
+import com.cysion.adjointlib.SimpleStyle;
 import com.cysion.adjointlib.view.AdjointContainer;
 import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.utils.ALog;
@@ -13,38 +13,7 @@ import com.cysion.adjointlib.utils.ScreenUtil;
  * Created by Cysion Liu on 2017/8/10.
  */
 
-public class VerticalAlphaStyle implements AdjointStyle {
-    private float minAlpha = 0.2f;
-    private boolean linearable = true;
-    private float linearPos = 0.05f;
-
-    public VerticalAlphaStyle setAdjConfig(AdjConfig aAdjConfig) {
-        if (aAdjConfig == null) {
-            return this;
-        }
-        setLinearable(aAdjConfig.isLinearable());
-        setLinearPos(aAdjConfig.getLinearPos());
-        setMinAlpha(aAdjConfig.getMin());
-        return this;
-    }
-
-    public void setLinearPos(float aLinearPos) {
-        if (aLinearPos > 0.2f || aLinearPos <= 0.0f) {
-            aLinearPos = 0.2f;
-        }
-        linearPos = aLinearPos;
-    }
-
-    public void setLinearable(boolean aLinearable) {
-        linearable = aLinearable;
-    }
-
-    public void setMinAlpha(float aMinAlpha) {
-        if (aMinAlpha < 0) {
-            aMinAlpha = 0;
-        }
-        minAlpha = aMinAlpha;
-    }
+public class VerticalScaleSimpleStyle extends SimpleStyle implements AdjointStyle {
 
     @Override
     public void onAttachedToImageView(AdjointContainer view) {
@@ -58,7 +27,6 @@ public class VerticalAlphaStyle implements AdjointStyle {
 
     @Override
     public void transform(AdjointContainer aContainer, Canvas canvas, int[] viewLocation, Rect parentLocation) {
-
         ALog.single().ld("alpha-begin");
         int y = viewLocation[1];
         int ptop = parentLocation.top;
@@ -88,16 +56,21 @@ public class VerticalAlphaStyle implements AdjointStyle {
         if (index >= itemMaxMoveScope) {
             index = itemMaxMoveScope;
         }
+        ALog.single().ld("target y:" + y);
         float al = 1.0f;
-        if (linearable) {
-            if (index < (linearPos * itemMaxMoveScope)) {
+        if (isLinearable()) {
+            if (index < getLinearPos() * itemMaxMoveScope) {
                 index = 0;
             }
-            al = (1 - minAlpha)*(itemMaxMoveScope-index) / itemMaxMoveScope + minAlpha;
+            al = (1 - getMinScale()) * (itemMaxMoveScope - index) / itemMaxMoveScope + getMinScale();
         } else {
-            al = (4 * minAlpha - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
-                    + (4.0f - 4 * minAlpha) * index / itemMaxMoveScope + minAlpha;
+            al = (4 * getMinScale() - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
+                    + (4.0f - 4 * getMinScale()) * index / itemMaxMoveScope + getMinScale();
         }
-        aContainer.setAlpha(al + minAlpha);
+        if (al < getMinScale()) {
+            al = getMinScale();
+        }
+        al = al * getFactor();
+        canvas.scale(al, al, vWidth/2, vHeight*getPrivotY());
     }
 }
