@@ -27,7 +27,7 @@ which can scroll. The animation contains one or more of parallax,alpha,scale.
 ```
 dependencies {
   // jCenter
-  compile 
+  compile 'com.cysion:adjointlib:1.0.0'
 }
 ```
 
