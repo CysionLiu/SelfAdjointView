@@ -1,5 +1,5 @@
 # SelfAdjointView
-[中文参见这里](./readme-cn.md)
+[中文参见这里](./readme_cn.md)
 
 SelfAdjointView is an Android library that allows developers to easily let view change with the parent 
 which can scroll. The animation contains one or more of parallax,alpha,scale.
