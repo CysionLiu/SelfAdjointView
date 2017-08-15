@@ -37,6 +37,9 @@ public class VerticalMoveStyle implements AdjointStyle {
 
             // image's width and height
             Drawable drawable = (childView).getDrawable();
+            if (drawable==null) {
+                return;
+            }
             int iWidth = drawable.getIntrinsicWidth();
             int iHeight = drawable.getIntrinsicHeight();
 
