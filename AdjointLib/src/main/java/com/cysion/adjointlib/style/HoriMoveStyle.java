@@ -62,10 +62,10 @@ public class HoriMoveStyle implements AdjointStyle {
 
             if (iWidth * vHeight > iHeight * vWidth || iWidth > vWidth) {
                 // avoid over scroll
-                if (x < pLeft - vWidth) {
-                    x = pLeft - vWidth;
-                } else if (x > dWidth) {
-                    x = dWidth;
+                if (x < pLeft ) {
+                    x = pLeft;
+                } else if (x > dWidth- vWidth) {
+                    x = dWidth- vWidth;
                 }
                 x = x - pLeft;
                 ALog.single().ld("target x:" + x);

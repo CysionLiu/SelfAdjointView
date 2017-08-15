@@ -63,10 +63,10 @@ public class VerticalMoveStyle implements AdjointStyle {
 
             if (iWidth * vHeight < iHeight * vWidth || iHeight > vHeight) {
                 // avoid over scroll
-                if (y < ptop - vHeight) {
-                    y = ptop - vHeight;
-                } else if (y > dHeight) {
-                    y = dHeight;
+                if (y < ptop) {
+                    y = ptop;
+                } else if (y > dHeight - vHeight) {
+                    y = dHeight - vHeight;
                 }
                 y = y - ptop;
                 ALog.single().ld("target y:" + y);
