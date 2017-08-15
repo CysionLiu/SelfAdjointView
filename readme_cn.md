@@ -29,8 +29,13 @@ dependencies {
 ```
 
 ### 平行滑动效果
-目前这个效果仅支持作用于图片，可以与其它动效同时作用于图片。该图片应该是AdjointImageView或者其子类，同时该view应该被AdjointContainer包裹，此时，该container应该只有这一个子view.注意，若要有效果，还需图片本身的高/宽比大于container的。
+目前这个效果仅支持作用于图片，可以与其它动效同时作用于图片。该图片应该是AdjointImageView或者其子类，同时该view应该被AdjointContainer包裹，此时，该container应该只有这一个子view..*注意*，若要有效果，纵向时需要图片本身的高/宽比大于AdjointContainer的，横向时，需要图片本身的宽/高比大于AdjointContainer的。
 
+lib中提供了VerticalMoveStyle和HoriMoveStyle两种实现，可实现AdjointStyle接口自定义新的效果。。
+
+参数| 类型|描述
+-------|----------|-----
+isVertical | boolean|AdjointImageView的配置参数，可在xml里定义，true代表纵向效果，false代表横向
 
 #### Step 1
 
@@ -70,22 +75,26 @@ dependencies {
 获得滑动容器的位置信息，以Rect标示，并提供一个Locator来传递给AdjointContainer.
 
 ```java
-public class SecondActivity extends AppCompatActivity implements Locator...
-mContainer1 = (AdjointContainer) findViewById(R.id.adcontainer1);
-..	{
+public class SecondActivity extends AppCompatActivity implements Locator{
+  	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+		...
+		mContainer1 = (AdjointContainer) findViewById(R.id.adcontainer1);
 		mScrollView.post(new Runnable() {
             @Override
        		public void run() {
 		 	mScrollView.getGlobalVisibleRect(mR);
  			mContainer1.setLocator(SecondActivity.this);
 		}
-});
+		});
 ..	}
 	@Override
     public Rect getLocation() {
         return mR;
     }
-
+	...
+}
 ```
 
 #### Step 3
@@ -101,8 +110,18 @@ mContainer1 = (AdjointContainer) findViewById(R.id.adcontainer1);
 
 ### Alpha/Scale
 
-若想具有此类效果，View(s)应该置于AdjointContainer中.
+若想具有此类效果，View(s)应该置于AdjointContainer中..lib中提供了VerticalScaleStyle、VerticalAlphaStyle、HoriScaleStyle和HoriAlphaStyle等实现，可实现AdjointStyle接口来自定义新的效果。
 
+AdStyle的配置:
+
+参数| 类型|描述
+-------|----------|-----
+minAlpha| float|最低的透明度
+minScale| float|最小的item大小
+linearable| boolean|定义动画计算方式，true代表线性，false代表先大后小
+linearPos| float|线性计算，达到最大值时对应的滑动容器位置比例
+factor| float|缩放/透明度因子
+privotX| float|缩放时的锚点X坐标	
 #### Step 1
 
 布局代码

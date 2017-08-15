@@ -32,7 +32,13 @@ dependencies {
 ```
 
 ### Parallax
-Now the effect can only use for image while the image can be places in any viewgroup provided it is AdjointImageView and it is wrapped by AdjointContainer. Note that in this condition, AdjointContainer should only have one child, and height/width of image should be larger than that of container(vertical move).
+Now the effect can only use for image while the image can be places in any viewgroup provided it is AdjointImageView and it is wrapped by AdjointContainer. Note that in this condition, AdjointContainer should only have one child, and height/width of image should be larger than that of AdjointContainer(vertical move) and width/height of image should be larger than that of AdjointContainer(horizontal move).
+
+lib provides VerticalMoveStyle and HoriMoveStyle..A new style can be created by implement AdStyle.
+
+parameter| type|description
+-------|----------|-----
+isVertical | boolean|AdjointImageView's config，can be defined in .xml，true is for vertical
 
 
 #### Step 1
@@ -73,21 +79,26 @@ Code in layout
 Set scroll View's location in Rect and provide a locator for AdjointContainer.
 
 ```java
-public class SecondActivity extends AppCompatActivity implements Locator...
-mContainer1 = (AdjointContainer) findViewById(R.id.adcontainer1);
-..	{
+public class SecondActivity extends AppCompatActivity implements Locator{
+  	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+		...
+		mContainer1 = (AdjointContainer) findViewById(R.id.adcontainer1);
 		mScrollView.post(new Runnable() {
             @Override
        		public void run() {
 		 	mScrollView.getGlobalVisibleRect(mR);
  			mContainer1.setLocator(SecondActivity.this);
 		}
-});
+		});
 ..	}
 	@Override
     public Rect getLocation() {
         return mR;
     }
+	...
+}
 
 ```
 
@@ -105,6 +116,17 @@ create an obj of AdjointStyle and add it to the container.
 ### Alpha/Scale
 
 View(s) to show these effect should be wrapped in AdjointContainer.
+
+AdStyle' config:
+
+parameter| type|description
+-------|----------|-----
+minAlpha| float|minimum transprarency
+minScale| float|minimum item size
+linearable| boolean|method to caculate when scroll. True is for linear.
+linearPos| float|position relative to scroll container(not AdjointContainer) when scale or alpha to be max.
+factor| float|scale/factor factor
+privotX| float|anchor of scale , x coordinate	
 
 #### Step 1
 

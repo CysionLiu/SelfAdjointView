@@ -33,14 +33,14 @@ public class SecondActivity extends AppCompatActivity implements Locator {
         mContainer4 = (AdjointContainer) findViewById(R.id.adcontainer4);
         mContainer5 = (AdjointContainer) findViewById(R.id.adcontainer5);
         mContainer6 = (AdjointContainer) findViewById(R.id.adcontainer6);
-        AdjointStyle style = new VerticalAlphaStyle();
+        AdjointStyle style = new VerticalAlphaStyle().linearable(true).minAlpha(0.3f);
         mContainer1.addStyle(style);
         mContainer2.addStyle(style);
         mContainer3.addStyle(style);
         mContainer4.addStyle(style);
         mContainer5.addStyle(style);
 //        mContainer6.addStyle(new VerticalAlphaStyle().linearable(true));
-        AdjointStyle ver  = new VerticalScaleStyle().minScale(0.9f);
+        AdjointStyle ver  = new VerticalScaleStyle().minScale(0.85f).linearable(true).linearPos(0.15f);
         mContainer1.addStyle(ver);
         mContainer2.addStyle(ver);
         mContainer3.addStyle(ver);
