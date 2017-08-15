@@ -24,7 +24,7 @@ SelfAdjointView 是一个方便开发者实现滑动内联动效的安卓库，�
 ```
 dependencies {
   // jCenter
-  compile 'com.cysion:adjointlib:1.1.0'
+  compile 'com.cysion:adjointlib:1.2.0'
 }
 ```
 
