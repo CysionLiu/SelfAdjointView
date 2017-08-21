@@ -79,17 +79,18 @@ public class SecondActivity extends AppCompatActivity implements Locator{
   	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-		...
-		mContainer1 = (AdjointContainer) findViewById(R.id.adcontainer1);
-		mScrollView.post(new Runnable() {
-            @Override
-       		public void run() {
-		 	mScrollView.getGlobalVisibleRect(mR);
- 			mContainer1.setLocator(SecondActivity.this);
-		}
-		});
-..	}
-	@Override
+		...find view..
+	mContainer1 = (AdjointContainer) findViewById(R.id.adcontainer1);
+	//绘制完成，获得滑动容器的位置、大小信息
+	mScrollView.post(new Runnable() {
+           @Override
+       	   public void run() {
+	   mScrollView.getGlobalVisibleRect(mR);
+ 	   mContainer1.setLocator(SecondActivity.this);
+	   }
+	});
+..  }
+    @Override
     public Rect getLocation() {
         return mR;
     }
@@ -102,7 +103,7 @@ public class SecondActivity extends AppCompatActivity implements Locator{
 创建AdjointStyle对象，并设置给容器。
 
 ```java
- AdjointStyle style= new VerticalMoveStyle().minScale(0.9f);
+ AdjointStyle style= new VerticalMoveStyle();
  mContainer1.addStyle(style);
 ```
 此时，滑动容器滑动时，图片也会滑动，产生逆差效果。
