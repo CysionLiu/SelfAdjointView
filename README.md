@@ -27,7 +27,7 @@ which can scroll. The animation contains one or more of parallax,alpha,scale.
 ```
 dependencies {
   // jCenter
-  compile 'com.cysion:adjointlib:1.2.0'
+  compile 'com.cysion:adjointlib:1.3.0'
 }
 ```
 
@@ -116,6 +116,9 @@ create an obj of AdjointStyle and add it to the container.
 ### Alpha/Scale
 
 View(s) to show these effect should be wrapped in AdjointContainer.
+
+From version 1.3.0 ,OnReachMiddleCallBack was provided for getting the middle item;
+
 
 AdStyle' config:
 

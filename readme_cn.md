@@ -24,7 +24,7 @@ SelfAdjointView 是一个方便开发者实现滑动内联动效的安卓库，�
 ```
 dependencies {
   // jCenter
-  compile 'com.cysion:adjointlib:1.2.0'
+  compile 'com.cysion:adjointlib:1.3.0'
 }
 ```
 
@@ -112,6 +112,8 @@ public class SecondActivity extends AppCompatActivity implements Locator{
 ### Alpha/Scale
 
 若想具有此类效果，View(s)应该置于AdjointContainer中..lib中提供了VerticalScaleStyle、VerticalAlphaStyle、HoriScaleStyle和HoriAlphaStyle等实现，可实现AdjointStyle接口来自定义新的效果。
+
+另外，1.3.0版本提供了OnReachMiddleCallBack接口，用来获得中间的item，包括其位置。
 
 AdStyle的配置:
 
