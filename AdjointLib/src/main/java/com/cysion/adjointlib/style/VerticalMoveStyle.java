@@ -3,12 +3,11 @@ package com.cysion.adjointlib.style;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
-import com.cysion.adjointlib.view.AdjointContainer;
 import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.utils.ALog;
 import com.cysion.adjointlib.utils.ScreenUtil;
+import com.cysion.adjointlib.view.AdjointContainer;
 import com.cysion.adjointlib.view.AdjointImageView;
 
 /**
@@ -52,7 +51,6 @@ public class VerticalMoveStyle implements AdjointStyle {
                 return;
             }
             ALog.single().ld("iHeight--" + iHeight);
-            Log.e("flag--", "transform(VerticalMoveStyle.java:46)-->>" + iHeight);
             // view's width and height
             int vWidth = aContainer.getWidth() - aContainer.getPaddingLeft() - aContainer.getPaddingRight();
             int vHeight = aContainer.getHeight() - aContainer.getPaddingTop() - aContainer.getPaddingBottom();

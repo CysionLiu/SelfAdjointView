@@ -17,6 +17,16 @@ public abstract class SimpleStyle implements AdjointStyle {
     private float factor = 1.0f;
     private float privotX = 1.0f;
     private float privotY = 1.0f;
+    protected AdjointContainer.OnReachMiddleCallBack mReachCallBack = new AdjointContainer.OnReachMiddleCallBack() {
+        @Override
+        public void reachMiddle(AdjointContainer container) {
+
+        }
+    };
+
+    public void setReachCallBack(AdjointContainer.OnReachMiddleCallBack aReachCallBack) {
+        mReachCallBack = aReachCallBack;
+    }
 
     public float getPrivotX() {
         return privotX;

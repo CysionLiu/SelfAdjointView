@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.cysion.adjointlib.AdjointStyle;
 import com.cysion.adjointlib.Locator;
+import com.cysion.adjointlib.SimpleStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,28 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
     private List<AdjointStyle> mAdjointStyles = new ArrayList<>();
     private Rect parentLocation = new Rect();//parent list rect
     private Locator mLocator;
+    private OnReachMiddleCallBack mReachCallBack;
+    private int mItemPosition = 0;
 
+    public int getItemPosition() {
+        return mItemPosition;
+    }
+
+    public void setItemPosition(int aItemPosition) {
+        mItemPosition = aItemPosition;
+    }
+
+    public void setReachCallBack(OnReachMiddleCallBack aReachCallBack) {
+        mReachCallBack = aReachCallBack;
+    }
+    public void setReachCallBack(OnReachMiddleCallBack aReachCallBack,int aItemPosition) {
+        mReachCallBack = aReachCallBack;
+        mItemPosition = aItemPosition;
+    }
+
+    public interface OnReachMiddleCallBack {
+        void reachMiddle(AdjointContainer container);
+    }
 
     public AdjointContainer(Context context) {
         super(context);
@@ -80,7 +102,12 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
             return;
         }
         getLocationInWindow(viewLocation);
+        boolean addCallback = false;
         for (int i = 0; i < mAdjointStyles.size(); i++) {
+            if (!addCallback && mAdjointStyles.get(i) instanceof SimpleStyle&&mReachCallBack!=null) {
+                addCallback = true;
+                ((SimpleStyle) mAdjointStyles.get(i)).setReachCallBack(mReachCallBack);
+            }
             mAdjointStyles.get(i).transform(this, canvas, viewLocation, parentLocation);
         }
         super.onDraw(canvas);
@@ -97,6 +124,4 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
             requestLayout();
         }
     }
-
-
 }

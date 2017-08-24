@@ -35,7 +35,7 @@ public class ImgHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bindData(Activity aActivity, List<? extends BaseData> aDataList, int position) {
+    public void bindData(Activity aActivity, List<? extends BaseData> aDataList, final int position) {
         ImgData baseData = (ImgData) aDataList.get(position);
         mCon.clearStyles();
         if (baseData.getOriType() > 1) {
@@ -51,8 +51,15 @@ public class ImgHolder extends BaseViewHolder {
             mCon.setLocator(SimpleLocator.single());
             mCon.addStyle(new VerticalMoveStyle());
             mCon.addStyle(new VerticalAlphaStyle());
+
         }
         mImg.setImageResource(baseData.getImgId());
+        mCon.setReachCallBack(new AdjointContainer.OnReachMiddleCallBack() {
+            @Override
+            public void reachMiddle(AdjointContainer container) {
+//                Log.e("flag--","reachMiddle(ImgHolder.java:59)-->>"+container.getItemPosition());
+            }
+        },position);
 
     }
 }

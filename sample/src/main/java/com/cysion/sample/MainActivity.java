@@ -3,6 +3,7 @@ package com.cysion.sample;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,14 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false));
-        List<BaseData> imgList = Provider.single().getImgs();
-        List<BaseData> spanlist = Provider.single().getSpans();
-        BaseData hori = Provider.single().getHori1();
-        BaseData hori2 = Provider.single().getHori2();
-        imgList.add(hori);
-//        imgList.addAll(spanlist);
-//        imgList.addAll(spanlist);
-        imgList.add(hori2);
+        List<BaseData> imgList = fillData();
         mAdapter = new GlobalAdapter(this, imgList);
         mR = new Rect();
         mRecyclerView.post(new Runnable() {
@@ -48,6 +42,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @NonNull
+    private List<BaseData> fillData() {
+        List<BaseData> imgList = Provider.single().getImgs();
+        List<BaseData> spanlist = Provider.single().getSpans();
+        BaseData hori = Provider.single().getHori1();
+        BaseData hori2 = Provider.single().getHori2();
+        imgList.add(hori);
+        imgList.addAll(spanlist);
+        imgList.addAll(spanlist);
+        imgList.add(hori2);
+        return imgList;
     }
 
     public void next(View view) {

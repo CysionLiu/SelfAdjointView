@@ -62,6 +62,10 @@ public class HoriAlphaStyle extends SimpleStyle implements AdjointStyle {
             }
             al = (1 - getMinAlpha())*(itemMaxMoveScope-index) / itemMaxMoveScope + getMinAlpha();
         } else {
+            if(index>0.4f*itemMaxMoveScope&&index<0.6f*itemMaxMoveScope){
+                index = 0.5f*itemMaxMoveScope;
+                mReachCallBack.reachMiddle(aContainer);
+            }
             al = (4 * getMinAlpha() - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
                     + (4.0f - 4 * getMinAlpha()) * index / itemMaxMoveScope + getMinAlpha();
         }

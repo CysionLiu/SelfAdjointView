@@ -63,6 +63,10 @@ public class HoriScaleStyle extends SimpleStyle implements AdjointStyle {
             }
             al = (1 - getMinScale()) * (itemMaxMoveScope - index) / itemMaxMoveScope + getMinScale();
         } else {
+            if(index>0.4f*itemMaxMoveScope&&index<0.6f*itemMaxMoveScope){
+                index = 0.5f*itemMaxMoveScope;
+                mReachCallBack.reachMiddle(aContainer);
+            }
             al = (4 * getMinScale() - 4.0f) * index * index / (itemMaxMoveScope * itemMaxMoveScope)
                     + (4.0f - 4 * getMinScale()) * index / itemMaxMoveScope + getMinScale();
         }
