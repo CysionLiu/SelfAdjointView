@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.cysion.adjointlib.view.AdjointContainer
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card:cardCornerRadius="5dp"
+    card:cardElevation="5dp"
+    android:layout_margin="3dp"
+    >
+<com.cysion.adjointlib.view.AdjointContainer
     android:id="@+id/container"
-    android:background="@color/colorAccent"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:layout_margin="2dp">
+    android:layout_margin="5dp">
 
     <com.cysion.adjointlib.view.AdjointImageView
         android:id="@+id/img_holder_img"
@@ -16,3 +23,4 @@
 
 </com.cysion.adjointlib.view.AdjointContainer>
 
+</android.support.v7.widget.CardView>

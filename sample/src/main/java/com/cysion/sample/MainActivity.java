@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         List<BaseData> spanlist = Provider.single().getSpans();
         BaseData hori = Provider.single().getHori1();
         BaseData hori2 = Provider.single().getHori2();
-        imgList.add(hori);
+//        imgList.add(hori);
+        imgList.addAll(spanlist);
         imgList.addAll(spanlist);
         imgList.add(hori2);
         mAdapter = new GlobalAdapter(this, imgList);

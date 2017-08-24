@@ -41,7 +41,7 @@ public class SpanHolder extends BaseViewHolder {
     public void bindData(Activity aActivity, List<? extends BaseData> aDataList, int position) {
         SpanData baseData = (SpanData) aDataList.get(position);
         mImg.setImageResource(baseData.getResId());
-        mContent.setText(baseData.getContent());
+        mContent.setText(baseData.getTitle());
     }
 
 

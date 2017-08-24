@@ -28,5 +28,6 @@ dependencies {
     compile "com.android.support:design:${COMPILE_TOOLS}"
     compile "com.android.support:appcompat-v7:${COMPILE_TOOLS}"
     compile "com.android.support:recyclerview-v7:${COMPILE_TOOLS}"
+    compile "com.android.support:cardview-v7:${COMPILE_TOOLS}"
     compile project(':AdjointLib')
 }
