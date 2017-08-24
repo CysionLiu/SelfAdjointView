@@ -30,18 +30,20 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
         init();
     }
 
-    public AdjointContainer(Context context,  AttributeSet attrs) {
+    public AdjointContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public AdjointContainer(Context context,  AttributeSet attrs, int defStyleAttr) {
+    public AdjointContainer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     private void init() {
-        setBackgroundColor(0x0000);
+        if (getBackground() == null) {
+            setBackgroundColor(0x0000);
+        }
     }
 
     @Override
@@ -64,7 +66,7 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
         mAdjointStyles.remove(aAdjointStyle);
     }
 
-    public void clearStyles(){
+    public void clearStyles() {
         mAdjointStyles.clear();
     }
 
@@ -73,7 +75,7 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
         if (mLocator != null) {
             parentLocation = mLocator.getLocation();
         }
-        if (!enableScrollParallax || parentLocation==null||parentLocation.bottom == 0) {
+        if (!enableScrollParallax || parentLocation == null || parentLocation.bottom == 0) {
             super.onDraw(canvas);
             return;
         }

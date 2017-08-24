@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.cysion.adjointlib.view.AdjointContainer
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:my="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
-    android:layout_width="150dp"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:layout_marginRight="20dp"
+    android:layout_margin="3dp"
+    android:background="#ffffffff"
+    android:padding="3dp"
+    card:cardCornerRadius="5dp"
+    card:cardElevation="5dp"
     >
 
-    <com.cysion.adjointlib.view.AdjointImageView
-        android:id="@+id/img_holder_img"
-        android:layout_width="wrap_content"
+    <com.cysion.adjointlib.view.AdjointContainer
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:my="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/container"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        my:isVertical="false"/>
+        android:layout_margin="5dp"
+        >
 
-</com.cysion.adjointlib.view.AdjointContainer>
+        <com.cysion.adjointlib.view.AdjointImageView
+            android:id="@+id/img_holder_img"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            my:isVertical="false"/>
 
+    </com.cysion.adjointlib.view.AdjointContainer>
+
+</android.support.v7.widget.CardView>

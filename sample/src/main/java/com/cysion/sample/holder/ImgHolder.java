@@ -43,7 +43,7 @@ public class ImgHolder extends BaseViewHolder {
             mCon.addStyle(new HoriMoveStyle());
         } else if (baseData.getOriType() == 1) {
             mCon.setLocator(HoriLocator.single());
-            if (position<aDataList.size()-1) {
+            if (position < aDataList.size() - 1) {
                 mCon.addStyle(new HoriScaleStyle());
                 mCon.addStyle(new HoriAlphaStyle());
             }

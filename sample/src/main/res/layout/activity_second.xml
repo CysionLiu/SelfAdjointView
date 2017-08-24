@@ -5,123 +5,95 @@
     android:id="@+id/scroller"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#66000000"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="6dp"
+        android:background="#66000000"
         android:orientation="vertical">
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/sw"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="50dp"
+            android:background="@color/cardview_light_background"
+            android:layout_height="wrap_content"/>
 
         <com.cysion.adjointlib.view.AdjointContainer
             android:id="@+id/adcontainer1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            style="@style/style_adjoint">
 
             <com.cysion.adjointlib.view.AdjointImageView
                 android:id="@+id/img_ad1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
+                style="@style/style_img_second"
                 android:src="@mipmap/p1c"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/img_ad1"
-                android:layout_centerHorizontal="true"
+                style="@style/txt_second"
                 android:text="Hello world"
-                android:textColor="@color/colorPrimary"
                 android:textSize="24sp"/>
         </com.cysion.adjointlib.view.AdjointContainer>
 
         <com.cysion.adjointlib.view.AdjointContainer
             android:id="@+id/adcontainer2"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            style="@style/style_adjoint">
 
             <com.cysion.adjointlib.view.AdjointImageView
                 android:id="@+id/img_ad2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@mipmap/p2c"/>
+                style="@style/style_img_second"
+                android:src="@mipmap/p2c"
+                />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/img_ad2"
-                android:layout_centerHorizontal="true"
+                style="@style/txt_second"
                 android:text="Hello world"
-                android:textColor="@color/colorPrimary"
                 android:textSize="24sp"/>
         </com.cysion.adjointlib.view.AdjointContainer>
 
         <com.cysion.adjointlib.view.AdjointContainer
             android:id="@+id/adcontainer3"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            style="@style/style_adjoint">
 
             <com.cysion.adjointlib.view.AdjointImageView
                 android:id="@+id/img_ad3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@mipmap/p3c"/>
+                style="@style/style_img_second"
+                android:src="@mipmap/p3c"
+
+                />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/img_ad3"
-                android:layout_centerHorizontal="true"
-                android:text="Hello world"
-                android:textColor="@color/colorPrimary"
-                android:textSize="24sp"/>
+                style="@style/txt_second"
+                android:text="Hello world"/>
         </com.cysion.adjointlib.view.AdjointContainer>
 
         <com.cysion.adjointlib.view.AdjointContainer
             android:id="@+id/adcontainer4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            style="@style/style_adjoint">
 
             <com.cysion.adjointlib.view.AdjointImageView
+                style="@style/style_img_second"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
                 android:src="@mipmap/p4c"/>
         </com.cysion.adjointlib.view.AdjointContainer>
 
         <com.cysion.adjointlib.view.AdjointContainer
             android:id="@+id/adcontainer5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            style="@style/style_adjoint">
 
             <com.cysion.adjointlib.view.AdjointImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@mipmap/p5c"/>
+                style="@style/style_img_second"
+                android:src="@mipmap/p5c"
+                />
         </com.cysion.adjointlib.view.AdjointContainer>
 
         <com.cysion.adjointlib.view.AdjointContainer
             android:id="@+id/adcontainer6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            style="@style/style_adjoint">
 
             <com.cysion.adjointlib.view.AdjointImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
+                style="@style/style_img_second"
                 android:src="@mipmap/p6c"/>
         </com.cysion.adjointlib.view.AdjointContainer>
 
