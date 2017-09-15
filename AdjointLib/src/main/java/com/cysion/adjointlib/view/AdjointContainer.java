@@ -121,7 +121,6 @@ public class AdjointContainer extends RelativeLayout implements ViewTreeObserver
     public void onScrollChanged() {
         if (enableScrollParallax) {
             invalidate();
-            requestLayout();
         }
     }
 }
