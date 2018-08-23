@@ -1,4 +1,4 @@
-# SelfAdjointView(Deprecated )
+# SelfAdjointView
 [中文请看这里](./readme_cn.md)
 
 SelfAdjointView is an Android library that allows developers to easily let view change with the parent 
